@@ -1,0 +1,32 @@
+/* User Signup Form */
+.user-signup-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../public//img/signup.jpg");
+  height: 100vh;
+  color: rgb(0, 0, 0);
+
+  .container {
+    width: 50%;
+    text-align: left;
+    padding: 2rem;
+    background-color: rgb(230, 227, 227);
+    border-radius: 1rem;
+
+    button{
+      padding: 0.4rem 2rem;
+      .loading-icon{
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .error {
+    color: red !important;
+  }
+}
+
+/* User Signup Form Finish*/
