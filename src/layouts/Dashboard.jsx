@@ -1,17 +1,22 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
-import UserSignupForm from "../components/UserSignupForm";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import LanguageBar from "../components/LanguageBar";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
-export default function Dashboard() {
+function Dashboard() {
   return (
     <div>
-      <ToastContainer position="bottom-right" style={{zIndex:"55"}} />
-
+      <ToastContainer position="bottom-right" />
+      <LanguageBar/>
       <Routes>
-        <Route path="/" exact element={<UserSignupForm/>}></Route>
+        <Route exact path="/" element={<Login />}></Route>
+        <Route exact path="/signup" element={<Signup />}></Route>
       </Routes>
     </div>
   );
 }
+
+export default Dashboard;

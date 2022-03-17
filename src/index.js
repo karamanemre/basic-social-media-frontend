@@ -9,7 +9,6 @@ import './configuration/i18n'
 
 ReactDOM.render(
   <BrowserRouter>
-
     <App />
   </BrowserRouter>,
   document.getElementById('root')

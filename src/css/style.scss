@@ -1,11 +1,40 @@
 /* User Signup Form */
-.user-signup-form {
+.base-form{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../../public//img/signup.jpg");
   height: 100vh;
   color: rgb(0, 0, 0);
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-image: url("../../public//img/signup.jpg");
+}
+
+// <LanguageBar>
+.change-language {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 1.5rem;
+  
+  .disp {
+    background-color: rgb(209, 208, 208);
+    padding: 5px 10px;
+    border-radius: 10px;
+    img {
+      width: 28px;
+      height: 20px;
+      border: 1px solid white;
+      margin-right: 0.4rem;
+      cursor: pointer;
+    }
+  }
+}
+// <LanguageBar> Finish
+
+
+.user-signup-form {
 
   .container {
     width: 50%;
@@ -14,9 +43,9 @@
     background-color: rgb(230, 227, 227);
     border-radius: 1rem;
 
-    button{
+    button {
       padding: 0.4rem 2rem;
-      .loading-icon{
+      .loading-icon {
         width: 15px;
         height: 15px;
         margin-right: 10px;
@@ -29,4 +58,18 @@
   }
 }
 
+
+
 /* User Signup Form Finish*/
+
+/* User Signup Form */
+.login{
+  .div-up{
+    background-color: rgb(230, 227, 227);
+    width: 700px;
+    height: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    
+  }
+}

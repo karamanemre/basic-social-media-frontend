@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
-import UserSignupPage from "./components/UserSignupForm";
+import Signup from "./pages/Signup";
 import "./css/style.scss";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./layouts/Dashboard";
