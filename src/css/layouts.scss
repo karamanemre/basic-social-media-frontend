@@ -1,0 +1,114 @@
+// Navbar
+
+.navbar {
+  background-color: #eaebff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  .content {
+    .signup-button{
+        border-radius: 1.3rem;
+    }
+  }
+}
+
+
+//Home
+.home{
+  background-color: #3d4080;
+}
+
+
+
+/*Button With Pending */
+button {
+  padding: 0.4rem 2rem;
+  //Loading Icon
+  .loading-icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+  }
+}
+/*Button With Pending */
+
+
+// <LanguageBar>
+.change-language {
+  padding: 1.5rem;
+  .disp {
+    padding: 5px 10px;
+    border-radius: 10px;
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      z-index: 1;
+      font-size: smaller;
+      cursor: pointer;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+      
+    }
+  }
+}
+// <LanguageBar> Finish
+
+
+// SignIn
+.sign-in{
+  img{
+    border-radius: 2rem;
+    width: 40px;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    font-size: smaller;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    .head{
+      color: #01080c;
+      font-weight: 600;
+      cursor:auto;
+    }
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+    
+  }
+}
