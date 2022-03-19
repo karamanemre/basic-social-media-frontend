@@ -1,15 +1,38 @@
-import React from "react";
-import UserSignUpValidationNames from "../constants/UserSignUpValidationEnum";
+import React, { useEffect, useState } from "react";
+import UserSignUpValidationNames from "../core/UserSignUpValidationEnum";
 import Input from "../components/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { withTranslation } from "react-i18next";
 import UserServices from "../services/UserServices";
+import ButtonWithPending from "../components/ButtonWithPending";
+import axios from "axios";
+import WithApiProgress from "../core/WithApiProgress";
 
 function Login(props) {
 
+  const [pendingApiCall, setPendingApiCall] = useState(false);
+  const [error, setError] = useState("");
   const userService = new UserServices();
   const { t } = props;
+
+  useEffect(()=>{
+    axios.interceptors.request.use(request => {
+        setPendingApiCall(true);
+        return request;
+    });
+
+    axios.interceptors.response.use(
+        response => {
+            setPendingApiCall(false);
+            return response;
+        },
+        error => {
+            setPendingApiCall(false);
+            throw error;
+        }
+    );
+  })
 
   let initialValues = {
     username: "",
@@ -25,16 +48,19 @@ function Login(props) {
     ),
   });
 
-  const { handleSubmit, handleChange, values, errors, resetForm } = useFormik({
+  const { handleSubmit,handleChange,  values, errors, resetForm } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      userService.login(values)
+      setError("")
+      userService.login(values).catch((err) => {
+        setError(t(err.response.data.data.message));
+      })
     },
   });
 
   const { username, password } = errors;
-
+  let disabled = username && password || pendingApiCall
 
   return (
     <div className="base-form login">
@@ -62,22 +88,20 @@ function Login(props) {
               value={values.password}
               inputType={"password"}
             />
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error ? error : null}
+              </div>
+            )}
           </div>
 
-          <div>
-            <button
-              type="submit"
-              className="btn btn-primary mt-4"
-              disabled={username || password}
-
-            >
-              {t("Login")}
-            </button>
-          </div>
+          <ButtonWithPending disabled={disabled} pendingApiCall={pendingApiCall} t={t}/>
         </form>
       </div>
     </div>
   );
 }
 
-export default withTranslation()(Login);
+const LoginWithTranslation = withTranslation()(Login)
+//const LoginWithApiProgress = WithApiProgress(LoginWithTranslation,"/api/auth/authenticationHandle")
+export default LoginWithTranslation;
