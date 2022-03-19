@@ -18,6 +18,9 @@ i18n.use(initReactI18next).init({
                 "Unauthorized":"Unauthorized",
                 "Successfully added":"Registration successful",
                 "Failed added":"Registration unsuccessful",
+                "Profile":"Profile",
+                "Settings":"Settings",
+                "Log Out":"Log Out",
 
                 USER_NAME_CAN_NOT_BE_NULL:process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL,
                 USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS:process.env.REACT_APP_USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS,
@@ -45,6 +48,9 @@ i18n.use(initReactI18next).init({
                 "Unauthorized":"Kullanıcı adı veya şifre hatalı",
                 "Successfully added":"Kayıt Başarılı",
                 "Failed added":"Kayıt Başarısız",
+                "Profile":"Profil",
+                "Settings":"Ayarlar",
+                "Log Out":"Çıkış Yap",
 
                 USER_NAME_CAN_NOT_BE_NULL:process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL_TR,
                 USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS:process.env.REACT_APP_USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS_TR,
