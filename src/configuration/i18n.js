@@ -1,7 +1,6 @@
 import i18next from "i18next";
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
-import UserSignUpValidationNames from "../constants/UserSignUpValidationEnum";
 
 i18n.use(initReactI18next).init({
   
@@ -16,6 +15,9 @@ i18n.use(initReactI18next).init({
                 "Password" :"Password",
                 "Password Repeat" :"Password Repeat",
                 "Login":"Login",
+                "Unauthorized":"Unauthorized",
+                "Successfully added":"Registration successful",
+                "Failed added":"Registration unsuccessful",
 
                 USER_NAME_CAN_NOT_BE_NULL:process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL,
                 USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS:process.env.REACT_APP_USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS,
@@ -40,6 +42,9 @@ i18n.use(initReactI18next).init({
                 "Password" :"Şifre",
                 "Password Repeat" :"Şifre Tekrarı",
                 "Login":"Giriş Yap",
+                "Unauthorized":"Kullanıcı adı veya şifre hatalı",
+                "Successfully added":"Kayıt Başarılı",
+                "Failed added":"Kayıt Başarısız",
 
                 USER_NAME_CAN_NOT_BE_NULL:process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL_TR,
                 USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS:process.env.REACT_APP_USERNAME_MUST_BE_AT_LEAST_3_CHARACTERS_TR,
