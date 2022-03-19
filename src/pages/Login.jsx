@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import UserSignUpValidationNames from "../core/UserSignUpValidationEnum";
-import Input from "../components/Input";
+import Input from "../layouts/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { withTranslation } from "react-i18next";
 import UserServices from "../services/UserServices";
-import ButtonWithPending from "../components/ButtonWithPending";
+import ButtonWithPending from "../layouts/ButtonWithPending";
 import axios from "axios";
-import WithApiProgress from "../core/WithApiProgress";
+import {useNavigate} from 'react-router-dom';
 
 function Login(props) {
 
@@ -15,6 +15,7 @@ function Login(props) {
   const [error, setError] = useState("");
   const userService = new UserServices();
   const { t } = props;
+  const navigate = useNavigate();
 
   useEffect(()=>{
     axios.interceptors.request.use(request => {
@@ -33,6 +34,8 @@ function Login(props) {
         }
     );
   })
+
+  
 
   let initialValues = {
     username: "",
@@ -53,7 +56,7 @@ function Login(props) {
     validationSchema,
     onSubmit: (values) => {
       setError("")
-      userService.login(values).catch((err) => {
+      userService.login(values).then((res)=>navigate("/")).catch((err) => {
         setError(t(err.response.data.data.message));
       })
     },
@@ -95,7 +98,7 @@ function Login(props) {
             )}
           </div>
 
-          <ButtonWithPending disabled={disabled} pendingApiCall={pendingApiCall} t={t}/>
+          <ButtonWithPending disabled={disabled} pendingApiCall={pendingApiCall} text={t("Login")}/>
         </form>
       </div>
     </div>

@@ -3,13 +3,11 @@ import * as Yup from "yup";
 import React, { useEffect, useState } from "react";
 import UserServices from "../services/UserServices";
 import { toast } from "react-toastify";
-import Input from "../components/Input";
+import Input from "../layouts/Input";
 import {withTranslation} from 'react-i18next';
 import UserSignUpValidationNames from "../core/UserSignUpValidationEnum";
-import LanguageBar from "../components/LanguageBar";
-import ButtonWithPending from "../components/ButtonWithPending";
+import ButtonWithPending from "../layouts/ButtonWithPending";
 import axios from "axios";
-import withApiProgress from "../core/WithApiProgress";
 
 
 function Signup(props) {
@@ -92,9 +90,6 @@ function Signup(props) {
 
   return (
     <form onSubmit={handleSubmit} className="user-signup-form base-form">
-     
-     <LanguageBar/>
-
       <div className="container">
         <h1 className="mb-4">{t(SIGN_UP)}</h1>
 
@@ -138,7 +133,7 @@ function Signup(props) {
           inputType={"password"}
         />
 
-        <ButtonWithPending disabled={disabled} pendingApiCall={pendingApiCall} t={t}/>
+        <ButtonWithPending disabled={disabled} pendingApiCall={pendingApiCall} text={t("Sign Up")}/>
       </div>
     </form>
   );
