@@ -1,0 +1,45 @@
+
+//SignUp Login Base Form
+.base-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: rgb(0, 0, 0);
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-image: url("../../public//img/signup.jpg");
+  }
+
+/* User Signup Form */
+  .user-signup-form {
+    .container {
+      width: 50%;
+      text-align: left;
+      padding: 2rem;
+      background-color: rgb(230, 227, 227);
+      border-radius: 1rem;
+    }
+  
+    .error {
+      color: red !important;
+    }
+  }
+  /* User Signup Form Finish*/
+  
+  
+  
+  /* User Signup Form */
+  .login{
+    .div-up{
+      background-color: rgb(230, 227, 227);
+      width: 700px;
+      height: auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      
+    }
+  }
+  /* User Signup Form Finish*/
+  
