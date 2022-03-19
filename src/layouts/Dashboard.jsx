@@ -12,7 +12,7 @@ function Dashboard() {
       <ToastContainer position="bottom-right" />
       <LanguageBar/>
       <Routes>
-        <Route exact path="/" element={<Login />}></Route>
+        <Route exact path="/" element={ <Login />}></Route>
         <Route exact path="/signup" element={<Signup />}></Route>
       </Routes>
     </div>
