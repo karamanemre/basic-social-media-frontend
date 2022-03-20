@@ -14,8 +14,9 @@
     }
   }
   .content {
-    .signup-button{
+    .btn-sign-out{
         border-radius: 1.3rem;
+        margin-right: 1rem;
     }
   }
 }
@@ -23,7 +24,49 @@
 
 //Home
 .home{
-  background-color: #3d4080;
+  background-color: #eaebff;
+  min-height:100vh;
+  padding: 6rem;
+  display: flex;
+  .content{
+    .session{
+      display: flex;
+      justify-content: center;
+      margin-top: 5rem;
+      font-weight: 500;
+    }
+
+    h1{
+      font-family:  Arial, Helvetica, sans-serif;
+      font-weight: 500;
+      span{
+        color: #63B175;
+        font-weight: 600;
+      }
+    }
+    .button-container{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .btn-home{
+        border-radius: 2.5rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem; 
+        padding: 0.6rem;
+        width: 250px;
+        text-overflow: ellipsis;
+      }
+    }
+    
+    .right-bar{
+      .img-container{
+        text-align: right;
+        img{
+          width: 450px;
+        }
+      }
+    }
+  }
 }
 
 

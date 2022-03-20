@@ -8,6 +8,8 @@ import UserServices from "../services/UserServices";
 import ButtonWithPending from "../layouts/ButtonWithPending";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/UserSlice";
 
 function Login(props) {
 
@@ -16,32 +18,14 @@ function Login(props) {
   const userService = new UserServices();
   const { t } = props;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    axios.interceptors.request.use(request => {
-        setPendingApiCall(true);
-        return request;
-    });
-
-    axios.interceptors.response.use(
-        response => {
-            setPendingApiCall(false);
-            return response;
-        },
-        error => {
-            setPendingApiCall(false);
-            throw error;
-        }
-    );
-  })
-
-  
+  const {status} = useSelector(state =>  state.user)
 
   let initialValues = {
-    username: "",
-    password: "",
+    username: "user",
+    password: "Aa123**",
   };
-
   const validationSchema = Yup.object({
     username: Yup.string().required(
       t(UserSignUpValidationNames.USER_NAME_CAN_NOT_BE_NULL)
@@ -54,22 +38,27 @@ function Login(props) {
   const { handleSubmit,handleChange,  values, errors, resetForm } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setError("")
+      await dispatch(login(values))
+      setPendingApiCall(true)
       userService.login(values).then((res)=>navigate("/")).catch((err) => {
         setError(t(err.response.data.data.message));
-      })
+      }).finally(setPendingApiCall(false))
     },
   });
 
   const { username, password } = errors;
-  let disabled = username && password || pendingApiCall
+  let disabled = pendingApiCall===true || status==="loading"
 
   return (
     <div className="base-form login">
       <div className="div-up">
         <form onSubmit={handleSubmit}>
-          <h2 className="mb-5 mt-3"> {t("Login")}</h2>
+          <div>username : user</div>
+          <div>password : Aa123**</div>
+          <h2 className="mb-5 mt-3"> {t("Login")}</h2> 
+          
           <div>
             <Input
               name={"username"}
@@ -93,12 +82,12 @@ function Login(props) {
             />
             {error && (
               <div className="alert alert-danger" role="alert">
-                {error ? error : null}
+                {error}
               </div>
-            )}
+            )} 
           </div>
 
-          <ButtonWithPending disabled={disabled} pendingApiCall={pendingApiCall} text={t("Login")}/>
+          <ButtonWithPending disabled={disabled} pendingApiCall={disabled} text={t("Login")}/>
         </form>
       </div>
     </div>

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LanguageBar from "../layouts/LanguageBar";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
 
 function Navbar(props) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const { t } = props;
+  const {item , status , isAuthentication} = useSelector(state =>  state.user)
 
   return (
     <nav className="navbar navbar-dark">
@@ -24,7 +25,7 @@ function Navbar(props) {
         </div>
 
         <div className="content ml-auto">
-          {isAuthenticated ? <SignIn /> : <SignOut />}
+          {isAuthentication ? <SignIn user={item}/> : <SignOut />}
         </div>
       </div>
     </nav>

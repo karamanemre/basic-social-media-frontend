@@ -1,0 +1,44 @@
+@media only screen and (max-width: 1000px) {
+  .home {
+    .row {
+      .col-6 {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+      .right-bar {
+        .img-container {
+          text-align: center;
+          img {
+            width: 350px;
+          }
+        }
+      }
+      .button-container {
+        justify-content: center;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 578px) {
+  .home {
+    .row {
+      .right-bar {
+        .img-container {
+          img {
+            width: 200px;
+          }
+        }
+      }
+      .button-container {
+        flex-flow: row wrap;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
