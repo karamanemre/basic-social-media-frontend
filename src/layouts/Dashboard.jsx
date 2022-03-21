@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import UsersList from "../pages/UsersList";
 import Home from "./Home";
 
 function Dashboard() {
@@ -17,8 +18,9 @@ function Dashboard() {
       <Routes>
         <Route exact path="/" element={ <Home />}/>
         {isAuthentication===false && <Route exact path="/login" element={ <Login />}/>}
-        {/* <Route exact path="/login" element={ <Login />}/> */}
         <Route exact path="/signup" element={<Signup />}/>
+        <Route exact path="users/list" element={<UsersList/>}/>
+
         <Route exact path="*" element={<Home/>}/>
       </Routes>
     </div>

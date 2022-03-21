@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default class UserServices {
   add(user) {
-    console.log(user);
     return axios.post(`${process.env.REACT_APP_USER_BASE_URL_PATH}/add`, user);
   }
 
@@ -12,5 +11,9 @@ export default class UserServices {
 
   changeLanguage(language) {
     return (axios.defaults.headers["accept-language"] = language);
+  }
+
+  getAllUsers() {
+    return axios.get(`${process.env.REACT_APP_USER_BASE_URL_PATH}/getAllUsers`);
   }
 }
