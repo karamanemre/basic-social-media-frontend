@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { BiCaretDown } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/UserSlice";
+import { useTranslation } from "react-i18next";
 
 function SignIn(props) {
-
-  const { t , user , isAuthentication} = props;
+  const { t } = useTranslation();
+  const { user, isAuthentication } = props;
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   return (
     <div className="sign-in">
@@ -28,11 +29,13 @@ function SignIn(props) {
           <div className="item mb-1 head">{`@${user.username}`}</div>
           <div className="item mb-1">{t("Profile")}</div>
           <div className="item mb-1">{t("Settings")}</div>
-          <div className="item mb-1" onClick={handleLogOut}>{t("Log Out")}</div>
+          <div className="item mb-1" onClick={handleLogOut}>
+            {t("Log Out")}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default withTranslation()(SignIn);
+export default SignIn;

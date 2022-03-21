@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 import LanguageBar from "../layouts/LanguageBar";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
+import { useTranslation } from "react-i18next";
 
-function Navbar(props) {
-
-  const { t } = props;
-  const {item , status , isAuthentication} = useSelector(state =>  state.user)
-
+function Navbar() {
+  const { t } = useTranslation();
+  const { item, status, isAuthentication } = useSelector((state) => state.user);
   return (
     <nav className="navbar navbar-dark">
       <div className="container">
@@ -25,11 +24,11 @@ function Navbar(props) {
         </div>
 
         <div className="content ml-auto">
-          {isAuthentication ? <SignIn user={item}/> : <SignOut />}
+          {isAuthentication ? <SignIn user={item} /> : <SignOut />}
         </div>
       </div>
     </nav>
   );
 }
 
-export default withTranslation()(Navbar);
+export default Navbar;

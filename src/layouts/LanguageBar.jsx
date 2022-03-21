@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import UserServices from "../services/UserServices";
 import { BiCaretDown } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 
-function LanguageBar(props) {
+function LanguageBar() {
 
   const [language,setLanguage] = useState("TR");
   const userService = new UserServices();
+  const { i18n } = useTranslation();
 
   const onChangeLanguage = (language) => {
     const lang = language;
     setLanguage(lang.toUpperCase())
-    const { i18n } = props;
     i18n.changeLanguage(language);
     userService.changeLanguage(language);
   };
@@ -31,4 +32,4 @@ function LanguageBar(props) {
   );
 }
 
-export default withTranslation()(LanguageBar);
+export default LanguageBar;
