@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 function SignIn(props) {
   const { t } = useTranslation();
-  const { user, isAuthentication } = props;
+  const { user } = props;
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
@@ -29,7 +29,7 @@ function SignIn(props) {
           <div className="item mb-1 head">{`@${user.username}`}</div>
           <div className="item mb-1">{t("Profile")}</div>
           <div className="item mb-1">{t("Settings")}</div>
-          <div className="item mb-1" onClick={handleLogOut}>
+          <div className="item mb-1" onClick={()=>handleLogOut()}>
             {t("Log Out")}
           </div>
         </div>

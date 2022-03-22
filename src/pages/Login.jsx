@@ -3,23 +3,25 @@ import UserSignUpValidationNames from "../core/UserSignUpValidationEnum";
 import Input from "../layouts/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import UserServices from "../services/UserServices";
 import ButtonWithPending from "../layouts/ButtonWithPending";
-import axios from "axios";
-import {useNavigate} from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/UserSlice";
+import {useNavigate,useLocation, Link} from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
 import { useTranslation } from "react-i18next";
+import { login } from "../redux/UserSlice";
+
 
 function Login() {
 
-  const {status,isAuthentication} = useSelector(state =>  state.user)
-  const [error, setError] = useState("");
-  const userService = new UserServices();
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { item, status, isAuthentication } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  
+  const [error, setError] = useState("");
+  const { t } = useTranslation();
   let disabled = status==="loading"
+
  
   let initialValues = {
     username: "user",
@@ -33,23 +35,27 @@ function Login() {
       t(UserSignUpValidationNames.PASSWORD_CAN_NOT_BE_NULL)
     ),
   });
-  const { handleSubmit,handleChange,  values, errors, resetForm } = useFormik({
+  const { handleSubmit,handleChange,  values, errors, resetForm, } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      await dispatch(login(values))
-      isAuthentication ? push() : setError(t("Unauthorized"))
+      await handleLogin(values)
+      isAuthentication===true &&  navigate("/"); 
+      isAuthentication===false && setError(t("Unauthorized"))
+      //isAuthentication===true ? pushToHomePage() : setError(t("Unauthorized"))
     },
   });
-  const { username, password } = errors;
+
+  const handleLogin = async (value) => {
+    dispatch(login(value));
+  };
 
   useEffect(()=>{
     setError(undefined)
   },[values.password,values.username])
 
-  const push = () => {
-    navigate("/")
-  }
+ 
+
 
   return (
     <div className="base-form login">
@@ -61,7 +67,7 @@ function Login() {
             <Input
               name={"username"}
               label={"User Name"}
-              error={username}
+              error={errors.username}
               id={"username"}
               handleChange={handleChange}
               value={values.username}
@@ -72,7 +78,7 @@ function Login() {
             <Input
               name={"password"}
               label={"Password"}
-              error={password}
+              error={errors.password}
               id={"password"}
               handleChange={handleChange}
               value={values.password}
@@ -84,11 +90,15 @@ function Login() {
               </div>
             )} 
           </div>
-          <div>username : user</div>
-          <div>password : Aa123**</div>
+          {/* <div>username : user</div>
+          <div>password : Aa123**</div> */}
 
           <ButtonWithPending disabled={disabled} pendingApiCall={disabled} text={t("Login")}/>
         </form>
+        <div className="mt-3">
+          <span className="text-muted">Spring sosyal'e katılmak ister misiniz?</span>
+         <Link to={"/signup"} style={{textDecoration:"none"}} className="font-weight-bold"> Şimdi kaydolun.</Link> 
+        </div>
       </div>
     </div>
   );

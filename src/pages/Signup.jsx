@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../redux/UserSlice";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 function Signup(props) {
   const userService = new UserServices();
@@ -48,10 +49,10 @@ function Signup(props) {
   };
 
   let initialValues = {
-    username: "",
-    fullname: "",
-    password: "",
-    passwordRepeat: "",
+    username: "user8",
+    fullname: "deneme",
+    password: "Aa123**",
+    passwordRepeat: "Aa123**",
   };
 
   const validationSchema = Yup.object({
@@ -171,6 +172,18 @@ function Signup(props) {
           pendingApiCall={pendingApiCall}
           text={t("Sign Up")}
         />
+
+        <div className="mt-4">
+          <span className="text-muted">Hesabın var mı?</span>
+          <Link
+            to={"/login"}
+            style={{ textDecoration: "none" }}
+            className="font-weight-bold"
+          >
+            {" "}
+            Giriş Yap.
+          </Link>
+        </div>
       </div>
     </form>
   );
