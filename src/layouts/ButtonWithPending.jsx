@@ -6,7 +6,7 @@ function ButtonWithPending(props) {
     <div>
          <button
           type="submit"
-          className="btn btn-primary mt-4"
+          className="btn btn-primary mt-4 w-100"
           disabled={disabled}
         >
           {pendingApiCall && <span className="spinner-border loading-icon" />}
