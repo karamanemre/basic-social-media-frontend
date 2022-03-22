@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 function Input(props) {
   const { t } = useTranslation();
   const { label, error, name, handleChange, value, id, inputType } = props;
-  let className = error ? "form-control is-invalid" : "form-control";
+  let className = error ? "form-control is-invalid input-component" : "form-control input-component";
   return (
     <div className="form-group mb-3">
       <label>{t(label)}</label>
