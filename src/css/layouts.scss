@@ -155,3 +155,23 @@ button {
     
   }
 }
+
+
+//Input component
+.input-component{
+  background-color: #333333 !important;
+  border-color: #333333 !important;
+  color: #fff !important;
+//Input component;
+}
+
+//Logo component
+.logo-clean{
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 2rem;
+  img{
+      width: 150px;
+  }
+}

@@ -1,45 +1,64 @@
-
-//SignUp Login Base Form
-.base-form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height:100vh;
-    color: rgb(0, 0, 0);
-    background-image: url("../../public/img/baseform-bg.png");
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-size: cover; 
-    background-color: #eaebff;
-  }
+//Base Form
+.base-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: rgb(255, 255, 255);
+  background-image: url("../../public/img/login-signup.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 /* User Signup Form */
-  .user-signup-form {
-    .container {
-      width: 50%;
-      text-align: left;
-      padding: 2rem;
-      background-color: rgb(231, 231, 231);
-      border-radius: 1rem;
-    }
-  
-    .error {
-      color: red !important;
-    }
+.user-signup-form {
+  .container {
+    width: 500px;
+    text-align: left;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #020204;
+    margin-top: -40px;
+    opacity: 0.9;
   }
-  /* User Signup Form Finish*/
-  
-  
-  
-  /* User Signup Form */
-  .login{
-    .div-up{
-      background-color: rgb(231, 231, 231);
-      width: 700px;
-      height: auto;
-      padding: 2rem;
-      border-radius: 1rem;
-    }
+
+  .error {
+    color: red !important;
   }
-  /* User Signup Form Finish*/
-  
+}
+/* User Signup Form Finish*/
+
+/* User Signup Form */
+.login {
+  .div-up {
+    background-color: #020204;
+    width: 500px;
+    height: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    opacity: 0.9;
+    margin-top: -40px;
+  }
+}
+/* User Signup Form Finish*/
+
+
+
+
+//Error page
+.error-page {
+
+  .error-template {
+    padding: 40px 15px;
+    text-align: center;
+  }
+  .error-actions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .error-actions .btn {
+    margin-right: 10px;
+  }
+}
+
