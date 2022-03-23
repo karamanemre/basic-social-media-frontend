@@ -6,17 +6,12 @@ import Navbar from "./layouts/Navbar";
 
 function App() {
 
-  const { pathname } = useLocation();
-console.log(pathname);
+  const {pathname} = useLocation()
+
   return (
       <div className="App">
-
-       {pathname!=="/login" && pathname!=="/signup" && <Navbar/>} 
-       {(pathname==="/login" || pathname==="/signup") && <div style={{position:"absolute"}}>
-         <div style={{padding:"2rem"}}>
-           <Logo/>
-         </div>
-         </div>} 
+        {(pathname==="/login" || pathname==="/signup") && <div className="position-absolute"><Logo/></div>}
+        {(pathname!=="/login" && pathname!=="/signup") &&  <Navbar/>}
         <Dashboard/>
         
       </div>

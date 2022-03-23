@@ -39,9 +39,9 @@ function Signup(props) {
         throw error;
       }
     );
-  });
+  },[]);
 
-  const handleIsSignupToLogin = async (value) => {
+  const handleIsSignupToHome = async (value) => {
     const { username, password } = value;
     const data = { username, password };
     await dispatch(login(data));
@@ -49,8 +49,8 @@ function Signup(props) {
   };
 
   let initialValues = {
-    username: "user8",
-    fullname: "deneme",
+    username: "user12",
+    fullname: "userdeneme",
     password: "Aa123**",
     passwordRepeat: "Aa123**",
   };
@@ -109,7 +109,7 @@ function Signup(props) {
             ? toast.success(t(response.data.message))
             : toast.error(t(response.data.message));
           validationErrors.username = "";
-          await handleIsSignupToLogin(values);
+          await handleIsSignupToHome(values);
         })
         .catch((e) => {
           const { username } = e.response.data.data;
@@ -172,16 +172,10 @@ function Signup(props) {
           pendingApiCall={pendingApiCall}
           text={t("Sign Up")}
         />
-
         <div className="mt-4">
-          <span className="text-muted">Hesabın var mı?</span>
-          <Link
-            to={"/login"}
-            style={{ textDecoration: "none" }}
-            className="font-weight-bold"
-          >
-            {" "}
-            Giriş Yap.
+          <span>{t("Do you have an account?")}</span>{" "}
+          <Link to={"/login"} className="text-decoration-none">
+            <span>{t("Login")}</span>
           </Link>
         </div>
       </div>

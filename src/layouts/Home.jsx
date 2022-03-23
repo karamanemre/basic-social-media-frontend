@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { withTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { Link ,useLocation} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { t } = useTranslation();
- 
- 
   return (
     <div className="home">
       <div className="container">

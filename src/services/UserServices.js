@@ -1,12 +1,8 @@
 import axios from "axios";
 
-const baseUrl=process.env.REACT_APP_USER_BASE_URL_PATH
-
 export default class UserServices {
-
-
   add(user) {
-    return axios.post(`${baseUrl}/add`, user);
+    return axios.post(`${process.env.REACT_APP_USER_BASE_URL_PATH}/add`, user);
   }
 
   login(credential) {
@@ -18,11 +14,6 @@ export default class UserServices {
   }
 
   getAllUsers() {
-    return axios.get(`${baseUrl}/getAllUsers`);
-  }
-
-  getAllUsersWithPage(data) {
-    const {pageNo,pageSizeNo} = data
-    return axios.get(`${baseUrl}/getAllUsersWithPage?pageNo=${pageNo}&pageSize=${pageSizeNo}`);
+    return axios.get(`${process.env.REACT_APP_USER_BASE_URL_PATH}/getAllUsers`);
   }
 }

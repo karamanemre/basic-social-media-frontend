@@ -1,4 +1,5 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import SecureLS from "secure-ls";
 import UserServices from "../services/UserServices";
 
@@ -15,16 +16,10 @@ export const getAllUsers = createAsyncThunk('getAllUsers',async () =>{
     return res.data.data;
 })
 
-export const getAllUsersWithPage = createAsyncThunk('getAllUsersWithPage',async (data) => {
-    const res = await userService.getAllUsersWithPage(data)
-    return res.data.data;
-})
-
 const handleChangeState = (state) => {
     secureLS.set("item",state.item)
     secureLS.set("isAuthentication",state.isAuthentication)
 }
-
 
 export const userSlice = createSlice({
     name:"user",
@@ -45,6 +40,7 @@ export const userSlice = createSlice({
         },
     },
     extraReducers:{
+         //login
         [login.pending]: (state,action) =>{
             state.status="loading"
             state.isLoading=true
@@ -59,9 +55,9 @@ export const userSlice = createSlice({
         },
         [login.rejected]: (state,action) =>{
             state.isLoading=false
-            state.isAuthentication=false
             state.status="failed"
             state.error = action.error.message
+            state.isAuthentication=false
         },
 
         //getAllUsers
@@ -75,22 +71,6 @@ export const userSlice = createSlice({
             state.items = [...action.payload]
         },
         [getAllUsers.rejected]: (state,action) =>{
-            state.isLoading=false
-            state.status="failed"
-            state.error = action.error.message
-        },
-
-        //getAllUsersWithPage
-        [getAllUsersWithPage.pending]: (state,action) =>{
-            state.status="loading"
-            state.isLoading=true
-        },
-        [getAllUsersWithPage.fulfilled]: (state,action) =>{
-            state.status="succeeded"
-            state.isLoading=false
-            state.items = {...action.payload}
-        },
-        [getAllUsersWithPage.rejected]: (state,action) =>{
             state.isLoading=false
             state.status="failed"
             state.error = action.error.message

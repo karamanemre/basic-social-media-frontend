@@ -1,6 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { BiCaretDown } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/UserSlice";
@@ -8,11 +8,13 @@ import { useTranslation } from "react-i18next";
 
 function SignIn(props) {
   const { t } = useTranslation();
-  const { user } = props;
+  const { user, isAuthentication } = props;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLogOut = () => {
-    dispatch(logout());
+  const handleLogOut = async () => {
+    await dispatch(logout());
+    navigate("/")
   };
 
   return (
@@ -29,7 +31,7 @@ function SignIn(props) {
           <div className="item mb-1 head">{`@${user.username}`}</div>
           <div className="item mb-1">{t("Profile")}</div>
           <div className="item mb-1">{t("Settings")}</div>
-          <div className="item mb-1" onClick={()=>handleLogOut()}>
+          <div className="item mb-1" onClick={handleLogOut}>
             {t("Log Out")}
           </div>
         </div>

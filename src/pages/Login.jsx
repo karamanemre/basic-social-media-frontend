@@ -3,26 +3,28 @@ import UserSignUpValidationNames from "../core/UserSignUpValidationEnum";
 import Input from "../layouts/Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import UserServices from "../services/UserServices";
 import ButtonWithPending from "../layouts/ButtonWithPending";
-import {useNavigate,useLocation, Link} from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
-import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/UserSlice";
-
+import { useTranslation } from "react-i18next";
 
 function Login() {
-
-  const { item, status, isAuthentication } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  
+  const { status, isAuthentication } = useSelector((state) => state.user);
   const [error, setError] = useState("");
+  const [apiCall, setApiCall] = useState(false);
+  const userService = new UserServices();
   const { t } = useTranslation();
-  let disabled = status==="loading"
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let disabled = status === "loading";
 
- 
+  const push = () => {
+    navigate("/");
+  };
+
   let initialValues = {
     username: "user",
     password: "Aa123**",
@@ -35,39 +37,36 @@ function Login() {
       t(UserSignUpValidationNames.PASSWORD_CAN_NOT_BE_NULL)
     ),
   });
-  const { handleSubmit,handleChange,  values, errors, resetForm, } = useFormik({
+  const { handleSubmit, handleChange, values, errors, resetForm } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      await handleLogin(values)
-      isAuthentication===true &&  navigate("/"); 
-      isAuthentication===false && setError(t("Unauthorized"))
-      //isAuthentication===true ? pushToHomePage() : setError(t("Unauthorized"))
+      setApiCall(true)
+      await dispatch(login(values));
+      await userService
+        .login(values)
+        .then((res) => push())
+        .catch((err) => setError(t("Unauthorized")))
+        .finally(setApiCall(false))
     },
   });
+  const { username, password } = errors;
 
-  const handleLogin = async (value) => {
-    dispatch(login(value));
-  };
-
-  useEffect(()=>{
-    setError(undefined)
-  },[values.password,values.username])
-
- 
-
+  useEffect(() => {
+    setError(undefined);
+  }, [values.password, values.username]);
 
   return (
     <div className="base-form login">
       <div className="div-up">
         <form onSubmit={handleSubmit}>
-          <h2 className="mb-5 mt-3"> {t("Login")}</h2> 
-          
+          <h2 className="mb-5 mt-3"> {t("Login")}</h2>
+
           <div>
             <Input
               name={"username"}
               label={"User Name"}
-              error={errors.username}
+              error={username}
               id={"username"}
               handleChange={handleChange}
               value={values.username}
@@ -78,7 +77,7 @@ function Login() {
             <Input
               name={"password"}
               label={"Password"}
-              error={errors.password}
+              error={password}
               id={"password"}
               handleChange={handleChange}
               value={values.password}
@@ -88,21 +87,28 @@ function Login() {
               <div className="alert alert-danger" role="alert">
                 {error}
               </div>
-            )} 
+            )}
           </div>
-          {/* <div>username : user</div>
-          <div>password : Aa123**</div> */}
+          <div>username : user</div>
+          <div>password : Aa123**</div>
 
-          <ButtonWithPending disabled={disabled} pendingApiCall={disabled} text={t("Login")}/>
+          <ButtonWithPending
+            disabled={disabled}
+            pendingApiCall={apiCall}
+            text={t("Login")}
+          />
         </form>
-        <div className="mt-3">
-          <span className="text-muted">Spring sosyal'e katılmak ister misiniz?</span>
-         <Link to={"/signup"} style={{textDecoration:"none"}} className="font-weight-bold"> Şimdi kaydolun.</Link> 
+        <div className="mt-4">
+          <div>
+            <span>{t("Want to join Spring social?")}</span>{" "}
+            <Link to={"/signup"} className="text-decoration-none">
+              <span>{t("Regitser now")}</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default Login;

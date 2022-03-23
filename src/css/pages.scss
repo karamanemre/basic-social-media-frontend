@@ -1,64 +1,48 @@
-//Base Form
-.base-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  color: rgb(255, 255, 255);
-  background-image: url("../../public/img/login-signup.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
+//SignUp Login Base Form
+.base-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:100vh;
+    color: rgb(0, 0, 0);
+    background-image: url("../../public/img/login-signup.jpg");
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-color: #eaebff;
+    color: #fff;
+  }
 
 /* User Signup Form */
-.user-signup-form {
-  .container {
-    width: 500px;
-    text-align: left;
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: #020204;
-    margin-top: -40px;
-    opacity: 0.9;
+  .user-signup-form {
+    .container {
+      width: 500px;
+      text-align: left;
+      padding: 2rem;
+      background-color: #000000;
+      opacity: 0.9;
+      border-radius: 1rem;
+    }
+  
+    .error {
+      color: red !important;
+    }
   }
-
-  .error {
-    color: red !important;
+  /* User Signup Form Finish*/
+  
+  
+  
+  /* User Signup Form */
+  .login{
+    .div-up{
+      background-color: #000000;
+      opacity: 0.9;
+      width: 500px;
+      height: auto;
+      padding: 2rem;
+      border-radius: 1rem;
+    }
   }
-}
-/* User Signup Form Finish*/
-
-/* User Signup Form */
-.login {
-  .div-up {
-    background-color: #020204;
-    width: 500px;
-    height: auto;
-    padding: 2rem;
-    border-radius: 1rem;
-    opacity: 0.9;
-    margin-top: -40px;
-  }
-}
-/* User Signup Form Finish*/
-
-
-
-
-//Error page
-.error-page {
-
-  .error-template {
-    padding: 40px 15px;
-    text-align: center;
-  }
-  .error-actions {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-  .error-actions .btn {
-    margin-right: 10px;
-  }
-}
-
+  /* User Signup Form Finish*/
+  

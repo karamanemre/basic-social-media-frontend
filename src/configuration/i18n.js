@@ -15,6 +15,9 @@ i18n.use(initReactI18next).init({
         "Full Name": "Full Name",
         Password: "Password",
         "Password Repeat": "Password Repeat",
+        "Want to join Spring social?":"Want to join Spring social?",
+        "Register now":"Register now.",
+        "Do you have an account?":"Do you have an account?",
 
         //SignIn İtems
         Profile: "Profile",
@@ -69,6 +72,9 @@ i18n.use(initReactI18next).init({
         "Full Name": "Tam Ad",
         Password: "Şifre",
         "Password Repeat": "Şifre Tekrarı",
+        "Want to join Spring social?":"Spring sosyal'e katılmak ister misiniz?",
+        "Register now":"Şimdi kaydolun.",
+        "Do you have an account?":"Hesabınız var mı?",
 
         //SignIn İtems
         Profile: "Profil",

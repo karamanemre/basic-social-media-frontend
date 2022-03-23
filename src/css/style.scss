@@ -2,3 +2,24 @@
 @import url("./layouts.scss");
 @import url("./setmedia.scss");
 
+.body{
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+}
+
+.text-decoration-none{
+    text-decoration: none;
+}
+
+.justify-spacebetween-align-center{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.position-absolute{
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 2rem;
+}
