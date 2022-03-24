@@ -21,7 +21,33 @@
       }
     }
   }
+
+  .user {
+    .main {
+      .left-bar{
+
+        .profile-image {
+         img{
+          width: 130px !important;
+         }
+        }
+
+        .body {
+          .information {
+            margin-top: 3rem;
+          }
+          .button-container{
+            margin-top: 3rem;
+          }
+        }
+      }
+     
+    }
+  }
+  
 }
+
+
 
 @media only screen and (max-width: 578px) {
   .home {
@@ -39,6 +65,22 @@
           width: 100%;
         }
       }
+    }
+  }
+
+  .user {
+    .main {
+      .left-bar{
+
+        .profile-image {
+         img{
+          width: 100px !important;
+         }
+        }
+
+     
+      }
+     
     }
   }
 }
