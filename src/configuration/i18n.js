@@ -37,6 +37,16 @@ i18n.use(initReactI18next).init({
         "There is no limit to what you can do with Spring":
           "There is no limit to what you can do with Spring",
 
+        //User Page
+        "Edit profile":"Edit Profile",
+
+        //Error Page
+        "Oops!":"Oops!",
+        "404 Not Found":"404 Not Found",
+        "Sorry, an error has occured, Requested page not found!":"Sorry, an error has occured, Requested page not found!",
+        "Take Me Home":"Take Me Home",
+        "Contact Support":"Contact Support",
+
         //Login Form Error Messages İtems
         USER_NAME_CAN_NOT_BE_NULL:
           process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL,
@@ -88,6 +98,16 @@ i18n.use(initReactI18next).init({
           "Spring sosyal medyası ile arkadaşlarınızla sohbet edin, paylaşın ve çok daha fazlasını yapın. Tüm bunları yapmak için şimdi bir hesap oluşturun ve bahar sosyal medyasının keyfini çıkarın",
         "There is no limit to what you can do with Spring":
           "Spring ile yapabileceklerinizin sınırı yok",
+
+         //User Page
+         "Edit profile":"Profili düzenle",
+
+        //Error Page
+        "Oops!":"Hata!",
+        "404 Not Found":"404 Sayfa bulunamadı",
+        "Sorry, an error has occured, Requested page not found!":"Üzgünüz, bir hata oluştu, istek tamamlanamadı!",
+        "Take Me Home":"Anasayfaya git",
+        "Contact Support":"Destek ile iletişime geç",
 
         //Login Response Message İtems
         Unauthorized: "Kullanıcı adı veya şifre hatalı",
