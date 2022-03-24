@@ -41,13 +41,13 @@ function Login() {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      setApiCall(true)
+      setApiCall(true);
       await dispatch(login(values));
       await userService
         .login(values)
         .then((res) => push())
         .catch((err) => setError(t("Unauthorized")))
-        .finally(setApiCall(false))
+        .finally(setApiCall(false));
     },
   });
   const { username, password } = errors;

@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const basePath = process.env.REACT_APP_USER_BASE_URL_PATH;
+
 export default class UserServices {
   add(user) {
-    return axios.post(`${process.env.REACT_APP_USER_BASE_URL_PATH}/add`, user);
+    return axios.post(`${basePath}/add`, user);
   }
 
   login(credential) {
@@ -14,6 +16,10 @@ export default class UserServices {
   }
 
   getAllUsers() {
-    return axios.get(`${process.env.REACT_APP_USER_BASE_URL_PATH}/getAllUsers`);
+    return axios.get(`${basePath}/getAllUsers`);
+  }
+
+  getUser(username) {
+    return axios.get(`${basePath}/getByUsername/${username}`);
   }
 }

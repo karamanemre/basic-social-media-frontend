@@ -13,7 +13,6 @@ function App() {
         {(pathname==="/login" || pathname==="/signup") && <div className="position-absolute"><Logo/></div>}
         {(pathname!=="/login" && pathname!=="/signup") &&  <Navbar/>}
         <Dashboard/>
-        
       </div>
  
   );

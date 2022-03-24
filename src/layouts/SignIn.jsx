@@ -1,12 +1,13 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiCaretDown } from "react-icons/bi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/UserSlice";
 import { useTranslation } from "react-i18next";
 
 function SignIn(props) {
+  const { item } = useSelector((state) => state.user);
   const { t } = useTranslation();
   const { user, isAuthentication } = props;
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function SignIn(props) {
 
   const handleLogOut = async () => {
     await dispatch(logout());
-    navigate("/")
+    navigate("/");
   };
 
   return (
@@ -27,9 +28,14 @@ function SignIn(props) {
           />{" "}
           <BiCaretDown />{" "}
         </span>
-        <div className="dropdown-content">
-          <div className="item mb-1 head">{`@${user.username}`}</div>
-          <div className="item mb-1">{t("Profile")}</div>
+        <div className="dropdown-content ">
+          <div className="item mb-1 head ">{`@${user.username}`}</div>
+          <Link
+            to={`/user/${item.username}`}
+            className="text-decoration-none text-dark"
+          >
+            <div className="item mb-1">{t("Profile")}</div>
+          </Link>
           <div className="item mb-1">{t("Settings")}</div>
           <div className="item mb-1" onClick={handleLogOut}>
             {t("Log Out")}
