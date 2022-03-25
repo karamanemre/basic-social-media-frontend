@@ -100,7 +100,7 @@ i18n.use(initReactI18next).init({
           "Spring ile yapabileceklerinizin sınırı yok",
 
          //User Page
-         "Edit profile":"Profili düzenle",
+         "Edit Profile":"Profili düzenle",
 
         //Error Page
         "Oops!":"Hata!",
