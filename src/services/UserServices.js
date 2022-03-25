@@ -11,6 +11,10 @@ export default class UserServices {
     return axios.post(`/api/auth/authenticationHandle`,{},{ auth: credential });
   }
 
+  update(user,credential) {
+    return axios.put(`${basePath}/update`,user,{ auth: credential });
+  }
+
   changeLanguage(language) {
     return (axios.defaults.headers["accept-language"] = language);
   }
