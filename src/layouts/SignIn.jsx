@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/UserSlice";
 import { useTranslation } from "react-i18next";
 
-function SignIn(props) {
-  const { item } = useSelector((state) => state.user);
+function SignIn() {
+
+  const { item ,user} = useSelector((state) => state.user);
   const { t } = useTranslation();
-  const { user, isAuthentication } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,13 +23,13 @@ function SignIn(props) {
       <div className="dropdown">
         <span>
           <img
-            src="https://avatars.githubusercontent.com/u/77540752?v=4"
+            src={user.imageUrl}
             alt=""
           />{" "}
           <BiCaretDown />{" "}
         </span>
         <div className="dropdown-content ">
-          <div className="item mb-1 head ">{`@${user.username}`}</div>
+          <div className="mb-1 head ">{`@${user.username}`}</div>
           <Link
             to={`/user/${item.username}`}
             className="text-decoration-none text-dark"

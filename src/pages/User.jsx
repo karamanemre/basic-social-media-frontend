@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ModalButton from "../layouts/ModalButton";
+import { getUser } from "../redux/UserSlice";
 import UserServices from "../services/UserServices";
 import ErrorPage from "./ErrorPage";
 
-function User() {
-  const [user, setUser] = useState({});
+function User(props) {
+
   const [error, setError] = useState(false);
   const { username } = useParams();
   const userService = new UserServices();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  let { user , images} = useSelector(state => state.user);
 
   useEffect(() => {
-    userService
-      .getUser(username)
-      .then((res) => setUser(res.data.data), setError(false))
-      .catch((err) => setError(true));
+    dispatch(getUser(username))
   }, [username]);
 
   return (
@@ -43,7 +44,7 @@ function User() {
                     <div className="profile-image-main">
                       <div className="profile-image rounded-circle">
                         <img
-                          src={"https://media-exp1.licdn.com/dms/image/C4E03AQEHOy4Qpce99g/profile-displayphoto-shrink_400_400/0/1629896589024?e=2147483647&v=beta&t=MLNMa8bTIppQbFlr8EoVTNaHdAZmBuJv8JPD-B4y5A4"}
+                          src={user.imageUrl} 
                           alt=""
                           className="rounded-circle"
                         />
@@ -57,6 +58,7 @@ function User() {
                     <div className="fullname ">{user.fullname}</div>
                     <div className="username">{`@${user.username}`}</div>
                   </div>
+                  {/* Modal Button */}
                   <div className="button-container">
                     <ModalButton user={user} />
                   </div>

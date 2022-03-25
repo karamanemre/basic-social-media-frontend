@@ -5,11 +5,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import UserServices from "../services/UserServices";
 import ButtonWithPending from "../layouts/ButtonWithPending";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/UserSlice";
 import { useTranslation } from "react-i18next";
+import LanguageBar from "../layouts/LanguageBar";
 
 function Login() {
   const { status, isAuthentication } = useSelector((state) => state.user);
@@ -60,7 +60,10 @@ function Login() {
     <div className="base-form login">
       <div className="div-up">
         <form onSubmit={handleSubmit}>
-          <h2 className="mb-5 mt-3"> {t("Login")}</h2>
+          <div className="d-flex justify-content-between align-items-center">
+            <h2 className="mb-5 mt-3"> {t("Login")}</h2>
+            <LanguageBar />
+          </div>
 
           <div>
             <Input
@@ -102,7 +105,7 @@ function Login() {
           <div>
             <span>{t("Want to join Spring social?")}</span>{" "}
             <Link to={"/signup"} className="text-decoration-none">
-              <span>{t("Regitser now")}</span>
+              <span>{t("Register now")}</span>
             </Link>
           </div>
         </div>

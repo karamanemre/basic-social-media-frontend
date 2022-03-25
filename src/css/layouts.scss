@@ -148,7 +148,16 @@ button {
     .head{
       color: #01080c;
       font-weight: 600;
-      cursor:auto;
+      cursor:pointer;
+
+      &:hover{
+        color: #737373;
+      }
+    }
+
+    .item:hover{
+      color: #0D6EFD;
+      transition: 0.2s;
     }
   }
 

@@ -12,6 +12,7 @@ import { login } from "../redux/UserSlice";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import LanguageBar from "../layouts/LanguageBar";
 
 function Signup(props) {
   const userService = new UserServices();
@@ -39,7 +40,7 @@ function Signup(props) {
         throw error;
       }
     );
-  },[]);
+  }, []);
 
   const handleIsSignupToHome = async (value) => {
     const { username, password } = value;
@@ -125,7 +126,10 @@ function Signup(props) {
   return (
     <form onSubmit={handleSubmit} className="user-signup-form base-form">
       <div className="container">
-        <h1 className="mb-4">{t(SIGN_UP)}</h1>
+        <div className="d-flex justify-content-between align-items-center">
+          <h2 className="mb-4">{t(SIGN_UP)}</h2>
+          <LanguageBar />
+        </div>
 
         <Input
           name={"username"}
