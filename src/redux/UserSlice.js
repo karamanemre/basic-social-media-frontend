@@ -49,13 +49,14 @@ export const userSlice = createSlice({
             state.isAuthentication=false
             state.item={}
             state.status="idle"
+            state.images=[]
             handleChangeState(state)
         },
 
         imagesChange:(state,action)=>{
             const {profileImage,backgroundImage} = action.payload
             console.log(profileImage);
-            state.images=[profileImage]
+            state.images=[profileImage,backgroundImage]
         },
     },
     extraReducers:{

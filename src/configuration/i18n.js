@@ -40,6 +40,13 @@ i18n.use(initReactI18next).init({
         //User Page
         "Edit profile":"Edit Profile",
 
+        //Modal Button component
+        "Updated":"Updated",
+        "Profile image":"Profile image",
+        "Edit Profile":"Edit Profile",
+        "Close":"Close",
+        "UnauthorizedUpdate": "The password is incorrect ",
+
         //Error Page
         "Oops!":"Oops!",
         "404 Not Found":"404 Not Found",
@@ -69,6 +76,7 @@ i18n.use(initReactI18next).init({
         PASSWORD_PATTERN_MESSAGE:
           process.env.REACT_APP_PASSWORD_PATTERN_MESSAGE,
         PASSWORDS_DO_NOT_MATCH: process.env.REACT_APP_PASSWORDS_DO_NOT_MATCH,
+        PASSWORD_AUTHORIZATION: process.env.REACT_APP_PASSWORD_AUTHORIZATION,
       },
     },
     tr: {
@@ -90,6 +98,8 @@ i18n.use(initReactI18next).init({
         Profile: "Profil",
         Settings: "Ayarlar",
         "Log Out": "Çıkış Yap",
+        "UnauthorizedUpdate": "Şifre hatalı",
+
 
         //Home İtems
         "Discover spring social": "Spring sosyali keşfet",
@@ -101,6 +111,12 @@ i18n.use(initReactI18next).init({
 
          //User Page
          "Edit Profile":"Profili düzenle",
+
+         //Modal Button component
+        "Updated":"Güncelle",
+        "Profile image":"Profil resmi",
+        "Edit Profile":"Profili düzenle",
+        "Close":"Kapat",
 
         //Error Page
         "Oops!":"Hata!",
@@ -136,6 +152,7 @@ i18n.use(initReactI18next).init({
         PASSWORD_PATTERN_MESSAGE:
           process.env.REACT_APP_PASSWORD_PATTERN_MESSAGE_TR,
         PASSWORDS_DO_NOT_MATCH: process.env.REACT_APP_PASSWORDS_DO_NOT_MATCH_TR,
+        PASSWORD_AUTHORIZATION: process.env.REACT_APP_PASSWORD_AUTHORIZATION_TR,
       },
     },
   },
