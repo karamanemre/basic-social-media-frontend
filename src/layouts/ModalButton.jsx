@@ -10,38 +10,51 @@ import { imagesChange, update } from "../redux/UserSlice";
 import { toast } from "react-toastify";
 import UserServices from "../services/UserServices";
 import ButtonWithPending from "./ButtonWithPending";
+import { Image, Video, Transformation } from "cloudinary-react";
+import axios from "axios";
 
 function ModalButton(props) {
-
   const userService = new UserServices();
   const fileReader = new FileReader();
   const { t } = useTranslation();
   const { item, user, status, isAuthentication } = useSelector(
     (state) => state.user
   );
-  const [apiCall, setApiCall] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState();
   const dispatch = useDispatch();
-  const [validationErrors, setValidationErrors] = useState({});
+  const [validationErrors, setValidationErrors] = useState({ username: undefined ,unauthorized:undefined});
   const editable = item.id === user.id && isAuthentication === true;
 
+  const changeHandlerImage = async (event) => {
+    const file = event.target.files[0];
+    postToCloudinary(file);
+  };
 
-    
-  const changeHandlerImage = (event) => {
-		const file = event.target.files[0]
-    fileReader.onloadend = () => {
-      setImage(fileReader.result)
-    }
-    fileReader.readAsDataURL(file)
-	};
-  
-  
+  const postToCloudinary = async (file) => {
+    const timestamp = Date.now() / 1000;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY);
+    formData.append("timestamp", timestamp);
+    formData.append(
+      "upload_preset",
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESENT
+    );
+    setLoading(true);
+    const img = await axios.post(
+      process.env.REACT_APP_CLOUDINARY_URL,
+      formData
+    );
+    setImage(img.data.secure_url);
+    setLoading(false);
+  };
 
   let initialValues = {
     id: 0,
     username: "",
     fullname: "",
-    password: "Aa123**",
+    password: "",
     imageUrl: "",
   };
   const validationSchema = Yup.object({
@@ -65,6 +78,9 @@ function ModalButton(props) {
         255,
         t(UserSignUpValidationNames.FULL_NAME_MUST_BE_AT_LEAST_255_CHARACTERS)
       ),
+    password: Yup.string().required(
+      t(UserSignUpValidationNames.PASSWORD_AUTHORIZATION)
+    ),
   });
 
   const { handleSubmit, handleChange, values, errors, resetForm } = useFormik({
@@ -72,30 +88,38 @@ function ModalButton(props) {
     validationSchema,
     onSubmit: async (values) => {
       values.id = user.id;
-      values.imageUrl = image === undefined ?  user.imageUrl : image
+      values.imageUrl = image === undefined ? user.imageUrl : image;
       let credential = { username: item.username, password: "Aa123**" };
       //dispatch(imagesChange({profileImage:image,backgroundImage:""}))
-      dispatch(update({ values, credential }));
-      userService
+      setLoading(true);
+      await userService
         .update(values, credential)
         .then(async (response) => {
+          dispatch(update({ values, credential }));
           response.data.success
             ? toast.success(t(response.data.message))
             : toast.error(t(response.data.message));
           validationErrors.username = "";
         })
         .catch((e) => {
-          const { username } = e.response.data.data;
-          setValidationErrors({ username: username });
-        })
+          const { username,message } = e.response.data.data;
+          setValidationErrors({ username: username ,unauthorized:message});
+        });
+      setLoading(false);
     },
   });
 
   const changedInitialValues = (user) => {
     values.username = user.username;
     values.fullname = user.fullname;
+    values.imageUrl = user.imageUrl;
   };
+
   
+  useEffect(()=>{
+    validationErrors.unauthorized=undefined
+  },[values.password])
+
 
   return (
     <div id="modal-button-container">
@@ -146,15 +170,36 @@ function ModalButton(props) {
                 errorColor={"red"}
               />
 
-              <input 
-              type="file" 
-              onChange={changeHandlerImage} />
+              <div>
+                {t("Profile image")}
+                <input
+                  type="file"
+                  onChange={changeHandlerImage}
+                  className="form-control"
+                  accept="image/png, image/jpg, image/jpeg"
+                />
+              </div>
+
+              <Input
+                name={"password"}
+                label={"Password"}
+                error={errors.password}
+                id={"passwordModalButon"}
+                handleChange={handleChange}
+                value={values.password}
+                inputType={"password"}
+                errorColor={"red"}
+              />
+
+              {validationErrors.unauthorized==="Unauthorized" && <div className="alert alert-danger" role="alert">
+                {t("UnauthorizedUpdate")}
+              </div>}
 
               <div>
                 <ButtonWithPending
-                  pendingApiCall={status==="loading"}
-                  disabled={apiCall}
-                  text={t("Güncelle")}
+                  pendingApiCall={status === "loading"}
+                  disabled={loading}
+                  text={t("Updated")}
                 />
               </div>
             </div>
