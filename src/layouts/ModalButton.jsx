@@ -89,13 +89,13 @@ function ModalButton(props) {
     onSubmit: async (values) => {
       values.id = user.id;
       values.imageUrl = image === undefined ? user.imageUrl : image;
-      let credential = { username: item.username, password: "Aa123**" };
+      let credential = { username: item.username, password: values.password };
       //dispatch(imagesChange({profileImage:image,backgroundImage:""}))
       setLoading(true);
       await userService
         .update(values, credential)
         .then(async (response) => {
-          dispatch(update({ values, credential }));
+          await dispatch(update({ values, credential }));
           response.data.success
             ? toast.success(t(response.data.message))
             : toast.error(t(response.data.message));
