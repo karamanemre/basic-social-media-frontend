@@ -8,10 +8,11 @@ import { useTranslation } from "react-i18next";
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ProfileImage from "./ProfileImage";
 
 function SignIn() {
 
-  const { item ,user} = useSelector((state) => state.user);
+  const { item } = useSelector((state) => state.user);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,14 +26,11 @@ function SignIn() {
     <div className="sign-in">
       <div className="dropdown">
         <span>
-          <img
-            src={user.imageUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"}
-            alt=""
-          />{" "}
+        <ProfileImage width={"40px"} height={"40px"}/>
           <BiCaretDown />{" "}
         </span>
         <div className="dropdown-content ">
-          <div className="mb-1 head "><span>{`@${user.username}`}</span> </div>
+          <div className="mb-1 head "><span>{`@${item.username}`}</span> </div>
           <Link
             to={`/user/${item.username}`}
             className="text-decoration-none text-dark"

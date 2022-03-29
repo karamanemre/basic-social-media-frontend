@@ -24,6 +24,7 @@ export const getAllUsers = createAsyncThunk('getAllUsers',async () =>{
 
 export const getUser = createAsyncThunk('getUser',async (username) =>{
     const res = await userService.getUser(username)
+    console.log(res);
     return res.data.data;
 })
 
@@ -39,9 +40,9 @@ export const userSlice = createSlice({
         isLoading:false,
         status:"idle",
         error:"",
-        item: secureLS.get("item") ? secureLS.get("item") : {},
+        item: secureLS.get("item") ? secureLS.get("item") : {},//login
         isAuthentication: secureLS.get("isAuthentication") ? secureLS.get("isAuthentication") : false,
-        user:{},
+        user:{},//update and getUser
         images:[]
     },
     reducers:{
@@ -71,6 +72,7 @@ export const userSlice = createSlice({
             state.isLoading=false
             state.isAuthentication=true
             state.item = {...action.payload.data}
+            getUser(action.payload.data.username)
             handleChangeState(state)
         },
         [login.rejected]: (state,action) =>{

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const basePath = process.env.REACT_APP_USER_BASE_URL_PATH;
+const basePath = process.env.REACT_APP_USER_USERCONTROLLER_BASE_URL_PATH;
 
 export default class UserServices {
   add(user) {
