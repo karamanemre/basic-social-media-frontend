@@ -9,6 +9,7 @@ import UsersList from "../pages/UsersList";
 import Home from "./Home";
 import ErrorPage from "../pages/ErrorPage";
 import User from "../pages/User";
+import Flow from "../pages/Flow";
 
 function Dashboard() {
 
@@ -21,8 +22,9 @@ function Dashboard() {
         <Route exact path="/" element={ <Home />}/>
         <Route exact path="/login" element={ <Login />}/>
         <Route exact path="/signup" element={<Signup />}/>
-        <Route exact path="user/:username" element={<User/>}/>
-        <Route exact path="users/list" element={<UsersList/>}/>
+        <Route exact path="/user/:username" element={<User/>}/>
+        <Route exact path="/users/list" element={<UsersList/>}/>
+        <Route exact path="/flow" element={<Flow/>}/>
 
         <Route exact path="*" element={<ErrorPage/>}/>
       </Routes>
