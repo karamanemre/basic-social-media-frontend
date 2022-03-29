@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #eaebff;
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 /* User Signup Form */
@@ -19,7 +19,7 @@
     width: 500px;
     text-align: left;
     padding: 2rem;
-    background-color: #000000;
+    background-color: #e2e2e2;
     opacity: 0.9;
     border-radius: 1rem;
   }
@@ -33,7 +33,7 @@
 /* User Signup Form */
 .login {
   .div-up {
-    background-color: #000000;
+    background-color: #e2e2e2;
     opacity: 0.9;
     width: 500px;
     height: auto;
@@ -44,7 +44,7 @@
 /* User Signup Form Finish*/
 
 
-// User
+// User Page
 .user {
   min-height: 100vh;
   background-color: #eaebff;
@@ -72,12 +72,6 @@
               position: absolute;
               top: 60%;
               left: 5%;
-              img {
-                width: 150px;
-                height: 150px;
-                border: 5px solid #fff;
-                object-fit: cover;
-              }
             }
           }
         }
@@ -105,5 +99,16 @@
         border-radius: 1rem;
       }
     }
+  }
+}
+
+
+//Flow Pages
+.flow-main{
+  padding-top: 3rem;
+  // background-color: #EAEBFF;
+  // min-height: 100vh;
+  .flow-sub{
+    
   }
 }

@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import {register, regitser} from 'timeago.js'
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -53,6 +54,13 @@ i18n.use(initReactI18next).init({
         "Sorry, an error has occured, Requested page not found!":"Sorry, an error has occured, Requested page not found!",
         "Take Me Home":"Take Me Home",
         "Contact Support":"Contact Support",
+
+        
+        //FlowsList Component
+        "Upload old posts":"Upload old posts",
+
+        //Share Posts Component
+        "Share":"Share",
 
         //Login Form Error Messages İtems
         USER_NAME_CAN_NOT_BE_NULL:
@@ -130,6 +138,13 @@ i18n.use(initReactI18next).init({
         "Successfully added": "Kayıt Başarılı",
         "Failed added": "Kayıt Başarısız",
 
+        //FlowsList Component
+        "Upload old posts":"Eski gönderileri yükle",
+
+         //Share Posts Component
+         "Share":"Paylaş",
+        
+
         //Login Form Error Messages İtems
         USER_NAME_CAN_NOT_BE_NULL:
           process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL_TR,
@@ -168,5 +183,26 @@ i18n.use(initReactI18next).init({
     wait: "true",
   },
 });
+
+
+const timeageTr = (number, index) => {
+  return [
+    ['az önce', 'şimdi'],
+    ['%s saniye önce', '%s saniye içinde'],
+    ['1 dakika önce', '1 dakika içinde'],
+    ['%s dakika önce', '%s dakika içinde'],
+    ['1 saat önce', '1 saat içinde'],
+    ['%s saat önce', '%s saat içinde'],
+    ['1 gün önce', '1 gün içinde'],
+    ['%s gün önce', '%s gün içinde'],
+    ['1 hafta önce', '1 hafta içinde'],
+    ['%s hafta önce', '%s hafta içinde'],
+    ['1 ay önce', '1 ay içinde'],
+    ['%s ay önce', '%s ay içinde'],
+    ['1 yıl önce', '1 yıl içinde'],
+    ['%s yıl önce', '%s yıl içinde'],
+  ][index]
+}
+register('tr',timeageTr)
 
 export default i18n;

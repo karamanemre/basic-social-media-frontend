@@ -115,12 +115,6 @@ button {
 
 // SignIn
 .sign-in {
-  img {
-    border-radius: 2rem;
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-  }
 
   .dropdown {
     position: relative;
@@ -167,5 +161,100 @@ button {
 
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+}
+
+
+
+//Share Post Component
+.share-post-main{
+  border-radius: 0.5rem;
+  .share-post-sub{
+    .card{
+      padding: 1rem;
+      border-radius: 0.5rem;
+      .card-header-content{
+        .text-area-container{
+          margin-left: 1rem;
+          width:100%;
+          textarea{
+            width: 100%;
+            border-radius: 1rem;
+            resize:none;
+            padding: 0.5rem;
+            border: 1px solid #9d9d9d !important;
+            &:hover{
+              background-color: #ececec;
+              cursor: pointer;
+              transition: 0.3s;
+            }
+            &:focus{
+              background-color: #ececec;
+              cursor: auto;
+            }
+          }
+        }
+      }
+      .card-body-content{
+          margin-top: -1rem;
+          .button-container{
+            position: relative;
+            .exit{
+              margin-right: 0.5rem;
+              position: absolute;
+              bottom: 0;
+              right: 120%;
+              text-decoration: none;
+              color: #01080c;
+              cursor: pointer;
+            }
+          }
+         
+      }
+    }
+  }
+}
+
+
+//FlowsList Layouts
+.disabled-a{
+  pointer-events: none;
+  cursor: default;
+}
+
+
+.flow-main{
+  .flow-sub{
+    .card{
+      .header{
+        .person-information{
+          margin-left: 10px;
+          .item{
+            height: 13px;
+            margin-bottom: 2px;
+            font-family: Arial, Helvetica, sans-serif;
+          }
+          .sub-title{
+            font-size: 12px;
+          }
+          .title{
+            font-weight:600;
+            font-size: 14px;
+          }
+        }
+       
+      }
+    }
+   .loaded-flow{
+     text-decoration: none;
+     a{
+       text-decoration: none;
+      &:hover{
+        color: #01080c !important;
+        cursor: pointer;
+        transition: 0.4s;
+      }
+     }
+   }
   }
 }
