@@ -15,6 +15,7 @@ import UserServices from "../services/UserServices";
 import ErrorPage from "./ErrorPage";
 
 function User(props) {
+
   const [error, setError] = useState(false);
   const { username } = useParams();
   const dispatch = useDispatch();
@@ -22,14 +23,15 @@ function User(props) {
   const { status, counter,paginationProperites } = useSelector((state) => state.flow);
   const { pageNo } = useSelector((state) => state.flow);
 
+
+
   useEffect(() => {
     dispatch(getUser(username));
   }, [username]);
-  console.log(paginationProperites);
 
   useEffect(async () => {
     await dispatch(
-      getFlowsByUsername({ username: username, pageNo: pageNo, pageSize: 2 })
+      getFlowsByUsername({ username: username, pageNo: pageNo, pageSize: process.env.REACT_APP_PAGE_SIZE })
     );
   }, [pageNo]);
 

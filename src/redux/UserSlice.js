@@ -24,7 +24,12 @@ export const getAllUsers = createAsyncThunk('getAllUsers',async () =>{
 
 export const getUser = createAsyncThunk('getUser',async (username) =>{
     const res = await userService.getUser(username)
-    console.log(res);
+    return res.data.data;
+})
+
+export const getUserById = createAsyncThunk('getUserById',async (value) =>{
+    const {id} = value
+    const res = await userService.getUserById(id);
     return res.data.data;
 })
 
@@ -115,6 +120,22 @@ export const userSlice = createSlice({
         },
 
          //getUser
+         [getUser.pending]: (state,action) =>{
+            state.status="loading"
+            state.isLoading=true
+        },
+        [getUser.fulfilled]: (state,action) =>{
+            state.status="succeeded"
+            state.isLoading=false
+            state.user = action.payload
+        },
+        [getUser.rejected]: (state,action) =>{
+            state.isLoading=false
+            state.status="failed"
+            state.error = action.error.message
+        },
+
+         //getUserById
          [getUser.pending]: (state,action) =>{
             state.status="loading"
             state.isLoading=true

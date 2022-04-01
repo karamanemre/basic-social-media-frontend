@@ -12,7 +12,7 @@ function Flow() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    await dispatch(getFlows({ pageNo: pageNo, pageSize: 2 }));
+    await dispatch(getFlows({ pageNo: pageNo, pageSize: process.env.REACT_APP_PAGE_SIZE }));
   }, [pageNo]);
 
 
@@ -24,7 +24,7 @@ function Flow() {
              {/* Column-8 */}
             <div className='col-8'>
                 <SharePost />
-                <FlowsList />
+                <FlowsList userId={55}/>
             </div>
             {/* Column-4 */}
             <div className='col-4'>

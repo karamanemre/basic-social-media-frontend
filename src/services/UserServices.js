@@ -26,4 +26,8 @@ export default class UserServices {
   getUser(username) {
     return axios.get(`${basePath}/getByUsername/${username}`);
   }
+
+  getUserById(id) {
+    return axios.get(`${basePath}//getById/${id}`);
+  }
 }

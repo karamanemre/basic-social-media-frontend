@@ -21,6 +21,18 @@ export const getFlowsByUsername = createAsyncThunk('getFlowsByUsername',async (v
     return res.data.data;
 })
 
+export const getFlowIdGreaterThan = createAsyncThunk('getFlowIdGreaterThan',async (value) =>{
+    const {id} = value
+    const res = await flowService.getFlowIdGreaterThan(id)
+    return res.data.data;
+})
+
+export const deleteById = createAsyncThunk('deleteById',async (value) =>{
+    const res = await flowService.deleteById(value)
+    return res.data.data;
+})
+
+
 
 export const flowSlice = createSlice({
     name:"flow",
@@ -86,6 +98,39 @@ export const flowSlice = createSlice({
             state.content=[...state.content,...action.payload.content]
         },
         [getFlowsByUsername.rejected]: (state,action) =>{
+            state.isLoading=false
+            state.status="failed"
+            state.error = action.error.message
+        },
+
+
+        // getFlowIdGreaterThan
+        [getFlowIdGreaterThan.pending]: (state,action) =>{
+            state.status="loading"
+            state.isLoading=true
+        },
+        [getFlowIdGreaterThan.fulfilled]: (state,action) =>{
+            state.status="succeeded"
+            state.isLoading=false
+            state.content=[...action.payload,...state.content]
+        },
+        [getFlowIdGreaterThan.rejected]: (state,action) =>{
+            state.isLoading=false
+            state.status="failed"
+            state.error = action.error.message
+        },
+
+        // deleteById
+        [deleteById.pending]: (state,action) =>{
+            state.status="loading"
+            state.isLoading=true
+        },
+        [deleteById.fulfilled]: (state,action) =>{
+            state.status="succeeded"
+            state.isLoading=false
+            state.content= state.content.filter( (c) => c.id !== action.meta.arg)
+        },
+        [deleteById.rejected]: (state,action) =>{
             state.isLoading=false
             state.status="failed"
             state.error = action.error.message
