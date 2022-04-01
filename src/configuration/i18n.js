@@ -58,6 +58,8 @@ i18n.use(initReactI18next).init({
         
         //FlowsList Component
         "Upload old posts":"Upload old posts",
+        "There are new posts":"There are new posts",
+        "You haven't shared a post yet":"You haven't shared a post yet",
 
         //Share Posts Component
         "Share":"Share",
@@ -140,6 +142,8 @@ i18n.use(initReactI18next).init({
 
         //FlowsList Component
         "Upload old posts":"Eski gönderileri yükle",
+        "There are new posts":"Yeni gönderiler var",
+        "You haven't shared a post yet":"Henüz bir gönderi paylaşmadın",
 
          //Share Posts Component
          "Share":"Paylaş",
