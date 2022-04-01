@@ -30,3 +30,15 @@
 .border-radius-2{
     border-radius: 2rem !important;
 }
+
+.new-posts-button{
+   position: relative;
+   padding-bottom: 1rem;
+   margin-top: -2rem;
+    button{
+        border-radius: 2rem !important;
+        font-size: 12px !important;
+        height: 25px;
+    }
+}
+

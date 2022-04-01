@@ -115,7 +115,6 @@ button {
 
 // SignIn
 .sign-in {
-
   .dropdown {
     position: relative;
     display: inline-block;
@@ -146,8 +145,8 @@ button {
       }
     }
 
-    .item{
-      span{
+    .item {
+      span {
         text-align: left;
         margin-right: auto;
       }
@@ -164,97 +163,126 @@ button {
   }
 }
 
-
-
 //Share Post Component
-.share-post-main{
+.share-post-main {
   border-radius: 0.5rem;
-  .share-post-sub{
-    .card{
+  .share-post-sub {
+    .card {
       padding: 1rem;
       border-radius: 0.5rem;
-      .card-header-content{
-        .text-area-container{
+      .card-header-content {
+        .text-area-container {
           margin-left: 1rem;
-          width:100%;
-          textarea{
+          width: 100%;
+
+          .image-container{
+            margin-right: 10px;
+          }
+
+          textarea {
             width: 100%;
             border-radius: 1rem;
-            resize:none;
+            resize: none;
             padding: 0.5rem;
             border: 1px solid #9d9d9d !important;
-            &:hover{
+            &:hover {
               background-color: #ececec;
               cursor: pointer;
               transition: 0.3s;
             }
-            &:focus{
+            &:focus {
               background-color: #ececec;
               cursor: auto;
             }
           }
         }
       }
-      .card-body-content{
-          margin-top: -1rem;
-          .button-container{
-            position: relative;
-            .exit{
-              margin-right: 0.5rem;
-              position: absolute;
-              bottom: 0;
-              right: 120%;
-              text-decoration: none;
-              color: #01080c;
-              cursor: pointer;
-            }
+      .card-body-content {
+        margin-top: -1rem;
+        .button-container {
+          position: relative;
+          .exit {
+            margin-right: 0.5rem;
+            position: absolute;
+            bottom: 0;
+            right: 120%;
+            text-decoration: none;
+            color: #01080c;
+            cursor: pointer;
           }
-         
+        }
       }
     }
   }
 }
 
-
 //FlowsList Layouts
-.disabled-a{
+.disabled-a {
   pointer-events: none;
   cursor: default;
 }
 
-
-.flow-main{
-  .flow-sub{
-    .card{
-      .header{
-        .person-information{
+.flow-main {
+  .flow-sub {
+    .card {
+      position: relative;
+      .header {
+        .person-information {
           margin-left: 10px;
-          .item{
+          .item {
             height: 13px;
             margin-bottom: 2px;
             font-family: Arial, Helvetica, sans-serif;
           }
-          .sub-title{
+          .sub-title {
             font-size: 12px;
           }
-          .title{
-            font-weight:600;
+          .title {
+            font-weight: 600;
             font-size: 14px;
           }
         }
-       
       }
     }
-   .loaded-flow{
-     text-decoration: none;
-     a{
-       text-decoration: none;
-      &:hover{
-        color: #01080c !important;
-        cursor: pointer;
-        transition: 0.4s;
+    .loaded-flow {
+      text-decoration: none;
+      a {
+        text-decoration: none;
+        &:hover {
+          color: #01080c !important;
+          cursor: pointer;
+          transition: 0.4s;
+        }
       }
-     }
-   }
+    }
+
+    .card-properties {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 100px;
+        left: -73px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 3px 5px;
+        z-index: 1;
+        border: 1px solid rgb(219, 219, 219);
+        border-radius: 0.2rem;
+      }
+      
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    }
   }
 }
