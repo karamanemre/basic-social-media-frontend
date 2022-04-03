@@ -24,7 +24,10 @@ function Navbar() {
       <div className="container">
         <div className="logo-container">
           <Logo/>
+          <div className="language-bar">
           <LanguageBar />
+          </div>
+         
         </div>
 
         <div className="content ml-auto">

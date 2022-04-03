@@ -7,7 +7,7 @@ import UserServices from "../services/UserServices";
 import ButtonWithPending from "../layouts/ButtonWithPending";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/UserSlice";
+import { loggedInUser, login } from "../redux/UserSlice";
 import { useTranslation } from "react-i18next";
 import LanguageBar from "../layouts/LanguageBar";
 
@@ -22,7 +22,7 @@ function Login() {
   let disabled = status === "loading";
 
   const push = () => {
-    navigate("/");
+    navigate("/flow");
   };
 
   let initialValues = {
@@ -43,6 +43,7 @@ function Login() {
     onSubmit: async (values) => {
       setApiCall(true);
       await dispatch(login(values));
+      await dispatch(loggedInUser(values.username))
       await userService
         .login(values)
         .then((res) => push())

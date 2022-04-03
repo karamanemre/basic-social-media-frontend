@@ -94,9 +94,24 @@
     .right-bar {
       background-color: #eaebff;
       padding-left: 2rem;
+      text-decoration: none !important;
+      a{
+        text-decoration: none !important;
+        color: black;
+      }
       .right-main-container {
-        background-color: #f3f2ef;
+       
         border-radius: 1rem;
+
+                
+        .username-user-right{
+          margin-top: -5px;
+          font-size: 12px;
+          width:auto;
+          text-overflow: ellipsis;
+        }
+
+
       }
     }
   }
@@ -106,9 +121,43 @@
 //Flow Pages
 .flow-main{
   padding-top: 3rem;
-  // background-color: #EAEBFF;
-  // min-height: 100vh;
+  background-color: #eaebff;
+  min-height: 100vh;
   .flow-sub{
     
+  }
+}
+
+//Settings Pages
+
+.settings{
+  background-color: #eaebff;
+   
+  .main{
+    min-height: 100vh;
+    padding-top: 3rem;
+    .properties{
+      background-color: #FFFFFF;
+      border-radius: 0.2rem;
+      padding: 1rem;
+      div span{
+        margin-left: 0.5rem;
+      }
+
+      .s-items{
+        margin-bottom: 1rem;
+        &:hover{
+          color: #1eb4e7;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+      }
+
+      .remove-user{
+        &:hover{
+          color: rgb(210, 14, 14) !important;
+        }
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import FlowsList from "../layouts/FlowsList";
 import ModalButton from "../layouts/ModalButton";
 import ProfileImage from "../layouts/ProfileImage";
@@ -13,27 +13,26 @@ import {
 import { getUser } from "../redux/UserSlice";
 import UserServices from "../services/UserServices";
 import ErrorPage from "./ErrorPage";
+import {getAllUsers} from '../redux/UserSlice'
+import { Link } from "react-router-dom";
 
 function User(props) {
 
   const [error, setError] = useState(false);
   const { username } = useParams();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const { user,items,loggedInUser } = useSelector((state) => state.user);
   const { status, counter,paginationProperites } = useSelector((state) => state.flow);
   const { pageNo } = useSelector((state) => state.flow);
-
-
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(getUser(username));
   }, [username]);
 
-  useEffect(async () => {
-    await dispatch(
-      getFlowsByUsername({ username: username, pageNo: pageNo, pageSize: process.env.REACT_APP_PAGE_SIZE })
-    );
-  }, [pageNo]);
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, []);
 
   return (
     <div className="user">
@@ -64,6 +63,7 @@ function User(props) {
                           width={"150px"}
                           height={"150px"}
                           border={"5px solid #fff"}
+                          src={user.imageUrl}
                         />
                       </div>
                     </div>
@@ -87,7 +87,21 @@ function User(props) {
               </div>
             </div>
             <div className="col-3 right-bar">
-              <div className="right-main-container">sdasass</div>
+              <div className="right-main-container">
+                {items.filter(f => f.id !== loggedInUser.id).map((m) => (
+                  <div className="card mb-1" key={m.id}>
+                     <Link to={`/user/${m.username}`}>
+                    <div className="p-2 flex-wrap d-flex justify-content-start align-items-center">
+                    <ProfileImage src={m.imageUrl} width={"30px"} height={"30px"} />
+                      <div className="d-flex justify-content-start flex-column p-1">
+                        {m.fullname}
+                        <span className="username-user-right text-muted">{`@${m.username}`}</span>
+                      </div>
+                    </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -11,15 +11,19 @@ import { addFlow, getFlows } from "../redux/FlowSlice";
 import { getUserById } from "../redux/UserSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import Input from "./Input";
+import FlowImageService from "../services/FlowImageService";
+import axios from "axios";
 
 function SharePost() {
   const flowService = new FlowService();
+  const flowImageService = new FlowImageService();
   const { status } = useSelector((state) => state.flow);
-  const { item } = useSelector((state) => state.user);
+  const { item,user,loggedInUser } = useSelector((state) => state.user);
   const { t } = useTranslation();
   const [focused, setFocused] = useState(false);
   const [error, setError] = useState(false);
   const [newImage, setNewImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const dispatch = useDispatch();
   let inputClr = newImage ? "#D4EDDA" : "#F8D7DA";
 
@@ -34,6 +38,24 @@ function SharePost() {
     };
     fileReader.readAsDataURL(file);
   };
+
+  const postToCloudinary = async () => {
+    const timestamp = Date.now() / 1000;
+    const formData = new FormData();
+    formData.append("file", newImage);
+    formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY);
+    formData.append("timestamp", timestamp);
+    formData.append(
+      "upload_preset",
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESENT
+    );
+    const img = await axios.post(
+      process.env.REACT_APP_CLOUDINARY_URL,
+      formData
+    );
+    setImageUrl(img.data.secure_url);
+  };
+
 
   let initialValues = {
     content: "",
@@ -50,7 +72,8 @@ function SharePost() {
       let credential = { username: item.username, password: "Aa123**" };
       dispatch(addFlow({ values, credential }));
       dispatch(getUserById({ id: item.id }));
-
+      //postToCloudinary()
+      //flowImageService.add({imageUrl:imageUrl,flow:{id:}})
       status === "succeeded" && setFocused(false);
       status === "succeeded" && (values.content = "");
     },
@@ -72,7 +95,7 @@ function SharePost() {
                   
                   <div className="image-container">
                     <div className="">
-                      <ProfileImage width={"70px"} height={"70px"} />
+                      <ProfileImage width={"70px"} height={"70px"} src={loggedInUser.imageUrl}/>
                     </div>
                   </div>
 
@@ -92,14 +115,14 @@ function SharePost() {
                 </span>
 
                 {focused && (
-                  <div className="attachment mt-3 d-flex flex-column">
-                    <div className="d-flex justify-content-center">
+                  <div className="attachment mt-3  d-flex flex-column">
+                    <div className="d-flex justify-content-around">
                       <span>
                         {/* <ImageIcon />{" "} */}
                         <input
                           type={"file"}
                           text={"image"}
-                          className={""}
+                          className={"mb-3"}
                           onChange={changeHandlerImage}
                           style={{ width: "5.5rem", backgroundColor: inputClr }}
                         />

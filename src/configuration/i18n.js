@@ -64,6 +64,9 @@ i18n.use(initReactI18next).init({
         //Share Posts Component
         "Share":"Share",
 
+        //Validations errors
+        "Validations errors update" : "This username already taken",
+
         //Login Form Error Messages İtems
         USER_NAME_CAN_NOT_BE_NULL:
           process.env.REACT_APP_USER_NAME_CAN_NOT_BE_NULL,
@@ -147,6 +150,9 @@ i18n.use(initReactI18next).init({
 
          //Share Posts Component
          "Share":"Paylaş",
+
+         //Validations errors
+         "Validations errors update" : "Bu kullanıcı adını alamazsınız",
         
 
         //Login Form Error Messages İtems

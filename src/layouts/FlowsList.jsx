@@ -7,6 +7,7 @@ import {
   deleteById,
   getFlowIdGreaterThan,
   getFlows,
+  getFlowsByUsername,
   resetContent,
 } from "../redux/FlowSlice";
 import ProfileImage from "./ProfileImage";
@@ -21,25 +22,29 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useLocation } from "react-router";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
+import Spinner from './Spinner'
 
-function FlowsList(props) {
+function FlowsList() {
 
   const flowService = new FlowService();
   const [firstFlowsId, setFirstFlowsId] = useState();
   const [newFlowCount, setNewFlowCount] = useState(0);
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const { content } = useSelector((state) => state.flow);
-  const { user } = useSelector((state) => state.user);
+  const { content , isLoading } = useSelector((state) => state.flow);
+  const { user ,loggedInUser} = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  const { userId } = props;
+  const { pageNo } = useSelector((state) => state.flow);
 
   useEffect(() => {
     if (pathname === `/user/${user.username}`) {
       dispatch(resetContent());
+      dispatch(
+        getFlowsByUsername({ username: user.username, pageNo: pageNo, pageSize: process.env.REACT_APP_PAGE_SIZE })
+      );
     }
-  }, []);
+  }, [user.username]);
 
   useEffect(() => {
     if (content.length > 1) {
@@ -82,7 +87,10 @@ function FlowsList(props) {
       )}
       <div className="flow-sub">
         <div className="flow-list">
-          {content && content.length < 1 && t("You haven't shared a post yet")}
+          {isLoading && <div className="d-flex justify-content-center" >
+            <Spinner/>
+          </div> }
+          {!isLoading && content && content.length < 1 && t("You haven't shared a post yet")}
           {content &&
             content.map((flow, key) => (
               <div className="card p-3 mb-3" key={key}>
@@ -104,13 +112,13 @@ function FlowsList(props) {
                     </div>
                     <div className="person-information d-flex flex-column align-center ">
                       <div className="item title">
-                        {flow.user.id === user.id
-                          ? user.fullname
+                        {flow.user.id === loggedInUser.id
+                          ? loggedInUser.fullname
                           : flow.user.fullname}
                       </div>
                       <div className="item sub-title text-muted">
-                        {flow.user.id === user.id
-                          ? `@${user.username}`
+                        {flow.user.id === loggedInUser.id
+                          ? `@${loggedInUser.username}`
                           : `@${flow.user.username}`}
                       </div>
                       <div className="item sub-title text-muted">
@@ -118,7 +126,8 @@ function FlowsList(props) {
                       </div>
                     </div>
                   </div>
-
+                  
+                  {flow.user.id === loggedInUser.id &&
                   <div className="card-properties">
                     <div className="dropdown">
                       <MoreVertIcon fontSize="12px" />
@@ -127,8 +136,8 @@ function FlowsList(props) {
                         <div className="d-flex align-items-center"><EditIcon style={{width:"20px",color:"#4FA3F8"}}/> Düzenle</div>
                       </div>
                     </div>
-
                   </div>
+                }
                 </div>
                 <div className="body">{flow.content}</div>
               </div>

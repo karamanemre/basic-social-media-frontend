@@ -17,7 +17,7 @@ function ModalButton(props) {
   const userService = new UserServices();
   const fileReader = new FileReader();
   const { t } = useTranslation();
-  const { item, user, status, isAuthentication } = useSelector(
+  const { item, user, status, isAuthentication,loggedInUser,isSuccessful,isLoading } = useSelector(
     (state) => state.user
   );
   const [loading, setLoading] = useState(false);
@@ -87,25 +87,12 @@ function ModalButton(props) {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      values.id = user.id;
-      values.imageUrl = image === undefined ? user.imageUrl : image;
+      values.id = loggedInUser.id;
+      values.imageUrl = image === undefined ? loggedInUser.imageUrl : image;
       let credential = { username: item.username, password: values.password };
-      //dispatch(imagesChange({profileImage:image,backgroundImage:""}))
-      setLoading(true);
-      await userService
-        .update(values, credential)
-        .then(async (response) => {
-          await dispatch(update({ values, credential }));
-          response.data.success
-            ? toast.success(t(response.data.message))
-            : toast.error(t(response.data.message));
-          validationErrors.username = "";
-        })
-        .catch((e) => {
-          const { username,message } = e.response.data.data;
-          setValidationErrors({ username: username ,unauthorized:message});
-        });
-      setLoading(false);
+      await dispatch(update({ values, credential }));
+      console.log(isSuccessful);
+      //isSuccessful === true ? toast.success(t("Successfully updated")) : toast.error(t("Failed updated"));
     },
   });
 
@@ -146,7 +133,7 @@ function ModalButton(props) {
             <h2 className="mb-5 mt-3"> {t("Edit Profile")}</h2>
 
             <div className="text-dark">
-              <Input
+              {/* <Input
                 name={"username"}
                 label={"User Name"}
                 error={
@@ -157,7 +144,7 @@ function ModalButton(props) {
                 value={values.username}
                 inputType={"text"}
                 errorColor={"red"}
-              />
+              /> */}
 
               <Input
                 name={"fullname"}
@@ -198,7 +185,7 @@ function ModalButton(props) {
               <div>
                 <ButtonWithPending
                   pendingApiCall={status === "loading"}
-                  disabled={loading}
+                  disabled={isLoading && loading}
                   text={t("Updated")}
                 />
               </div>

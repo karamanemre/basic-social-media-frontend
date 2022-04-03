@@ -10,6 +10,7 @@ import Home from "./Home";
 import ErrorPage from "../pages/ErrorPage";
 import User from "../pages/User";
 import Flow from "../pages/Flow";
+import Settings from "../pages/Settings";
 
 function Dashboard() {
 
@@ -25,6 +26,7 @@ function Dashboard() {
         <Route exact path="/user/:username" element={<User/>}/>
         <Route exact path="/users/list" element={<UsersList/>}/>
         <Route exact path="/flow" element={<Flow/>}/>
+        <Route exact path="/settings" element={<Settings/>}/>
 
         <Route exact path="*" element={<ErrorPage/>}/>
       </Routes>

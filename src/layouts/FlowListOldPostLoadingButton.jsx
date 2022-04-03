@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { changePageNo } from '../redux/FlowSlice';
 import { useTranslation } from 'react-i18next';
+import Spinner from './Spinner';
 
 function FlowListOldLoadingButton() {
 
@@ -25,7 +26,7 @@ function FlowListOldLoadingButton() {
               >
                 {status === "loading" && (
                   <div>
-                    <span className="spinner-border loading-icon" />{" "}
+                    <Spinner/>
                   </div>
                 )}
                 {status !== "loading" && (

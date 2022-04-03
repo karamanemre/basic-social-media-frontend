@@ -12,6 +12,9 @@
       width: 70px;
       height: 70px;
     }
+    .language-bar{
+      margin-left:1rem;
+    }
   }
   .content {
     .btn-sign-out {
@@ -82,9 +85,7 @@ button {
 
 // <LanguageBar>
 .change-language {
-  padding: 1.5rem;
   .disp {
-    padding: 5px 10px;
     border-radius: 10px;
 
     .dropdown {

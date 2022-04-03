@@ -7,15 +7,16 @@ import Input from "../layouts/Input";
 import UserSignUpValidationNames from "../core/UserSignUpValidationEnum";
 import ButtonWithPending from "../layouts/ButtonWithPending";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { login } from "../redux/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loggedInUser, login } from "../redux/UserSlice";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import LanguageBar from "../layouts/LanguageBar";
 
-function Signup(props) {
+function Signup() {
   const userService = new UserServices();
+  const { item } = useSelector((state) => state.user);
   const [pendingApiCall, setPendingApiCall] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const { SIGN_UP, USER_NAME, FULL_NAME, PASSWORD, PASSWORD_REPEAT } =
@@ -46,7 +47,8 @@ function Signup(props) {
     const { username, password } = value;
     const data = { username, password };
     await dispatch(login(data));
-    navigate("/");
+    await dispatch(loggedInUser(username))
+    navigate("/flow");
   };
 
   let initialValues = {

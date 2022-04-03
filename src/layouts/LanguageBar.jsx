@@ -9,7 +9,7 @@ function LanguageBar() {
   const [language,setLanguage] = useState("TR");
   const userService = new UserServices();
   const { i18n } = useTranslation();
-
+console.log(i18n);
   const onChangeLanguage = (language) => {
     const lang = language;
     setLanguage(lang.toUpperCase())
@@ -21,7 +21,7 @@ function LanguageBar() {
     <div className="change-language">
       <div className="disp">
         <div className="dropdown">
-          <span style={{fontSize:"smaller"}}>{language} <BiCaretDown/> </span>
+          <span style={{fontSize:"smaller"}}>{i18n.language.toUpperCase()} <BiCaretDown/> </span>
           <div className="dropdown-content">
             <div onClick={() => onChangeLanguage("tr")}>TR</div>
             <div onClick={() => onChangeLanguage("en")}>EN</div>
