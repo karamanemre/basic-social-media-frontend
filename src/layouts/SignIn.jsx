@@ -1,5 +1,4 @@
 import React from "react";
-import { withTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { BiCaretDown } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ProfileImage from "./ProfileImage";
+import axios from "axios";
+import UserServices from "../services/UserServices";
 
 function SignIn() {
 
@@ -16,9 +17,11 @@ function SignIn() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userService = new UserServices();
 
   const handleLogOut = async () => {
     await dispatch(logout());
+    userService.logout();
     navigate("/");
   };
  
