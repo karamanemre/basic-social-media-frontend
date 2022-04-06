@@ -14,8 +14,8 @@ export const login = createAsyncThunk('login',async (credential) =>{
 })
 
 export const update = createAsyncThunk('update',async (userAndCredential) =>{
-    const {values,credential} = userAndCredential
-    const res = await userService.update(values,credential)
+    const {values} = userAndCredential
+    const res = await userService.update(values)
     return res.data.data;
 })
 
@@ -44,6 +44,7 @@ const handleChangeState = (state) => {
     secureLS.set("item",state.item)
     secureLS.set("loggedInUser",state.loggedInUser)
     secureLS.set("isAuthentication",state.isAuthentication)
+    secureLS.set("user",state.user)
 }
 
 export const userSlice = createSlice({
@@ -58,7 +59,6 @@ export const userSlice = createSlice({
         user:{},//update and getUser
         images:[],
         loggedInUser: secureLS.get("loggedInUser") ? secureLS.get("loggedInUser") : {},
-        isSuccessful:false,
     },
     reducers:{
         logout:(state,action)=>{
@@ -69,6 +69,7 @@ export const userSlice = createSlice({
             state.status="idle"
             state.images=[]
             state.loggedInUser={}
+
             handleChangeState(state)
         },
 
@@ -111,14 +112,13 @@ export const userSlice = createSlice({
          [update.pending]: (state,action) =>{
             state.status="loading"
             state.isLoading=true
-            state.isSuccessful = false
         },
         [update.fulfilled]: (state,action) =>{
             state.status="succeeded"
             state.isLoading=false
             state.user = action.payload
             state.loggedInUser = action.payload
-            state.isSuccessful = true
+            state.item.username = action.payload.username
             handleChangeState(state)
         },
         [update.rejected]: (state,action) =>{

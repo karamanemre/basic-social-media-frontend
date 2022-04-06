@@ -5,7 +5,7 @@ const basePath = process.env.REACT_APP_USER_FLOWCONTROLLER_BASE_URL_PATH;
 export default class FlowService{
 
     add(flow,credential){
-        return axios.post(`${basePath}/add`,flow,{auth:credential});
+        return axios.post(`${basePath}/add`,flow);
     }
 
     getAll(pageNo,pageSize){

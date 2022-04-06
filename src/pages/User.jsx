@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import FlowsList from "../layouts/FlowsList";
 import ModalButton from "../layouts/ModalButton";
 import ProfileImage from "../layouts/ProfileImage";
@@ -21,18 +21,27 @@ function User(props) {
   const [error, setError] = useState(false);
   const { username } = useParams();
   const dispatch = useDispatch();
-  const { user,items,loggedInUser } = useSelector((state) => state.user);
+  const { user,items,loggedInUser,error:userError } = useSelector((state) => state.user);
   const { status, counter,paginationProperites } = useSelector((state) => state.flow);
   const { pageNo } = useSelector((state) => state.flow);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getUser(username));
-  }, [username]);
 
   useEffect(() => {
     dispatch(getAllUsers())
   }, []);
+
+
+  useEffect(async () => {
+    if(status==="succeeded"){
+      await dispatch(getUser(username));
+    }
+    else{
+      navigate(`/user/${loggedInUser.username}`)
+    }
+  }, [username]);
+
 
   return (
     <div className="user">
