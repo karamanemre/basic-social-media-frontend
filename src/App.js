@@ -1,4 +1,7 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { useLocation } from "react-router";
+import SecureLS from "secure-ls";
 import "./css/style.scss";
 import Dashboard from "./layouts/Dashboard";
 import Logo from "./layouts/Logo";
@@ -6,7 +9,14 @@ import Navbar from "./layouts/Navbar";
 
 function App() {
 
+  const secureLS = new SecureLS();
   const {pathname} = useLocation()
+
+  useEffect(()=>{
+    if(secureLS.get("authorization")){
+      axios.defaults.headers['Authorization'] = secureLS.get("authorization")
+    }
+  })
 
   return (
       <div className="App">
