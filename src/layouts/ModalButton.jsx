@@ -17,7 +17,7 @@ function ModalButton(props) {
   const userService = new UserServices();
   const fileReader = new FileReader();
   const { t } = useTranslation();
-  const { item, user, status, isAuthentication,loggedInUser,isSuccessful,isLoading } = useSelector(
+  const { item, user, status, isAuthentication,loggedInUser,isLoading } = useSelector(
     (state) => state.user
   );
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ function ModalButton(props) {
     id: 0,
     username: "",
     fullname: "",
-    password: "",
+    password: "Aa123**",
     imageUrl: "",
   };
   const validationSchema = Yup.object({
@@ -89,10 +89,8 @@ function ModalButton(props) {
     onSubmit: async (values) => {
       values.id = loggedInUser.id;
       values.imageUrl = image === undefined ? loggedInUser.imageUrl : image;
-      let credential = { username: item.username, password: values.password };
-      await dispatch(update({ values, credential }));
-      console.log(isSuccessful);
-      //isSuccessful === true ? toast.success(t("Successfully updated")) : toast.error(t("Failed updated"));
+      await dispatch(update({ values}));
+      status === "succeeded" ? toast.success(t("Successfully updated")) : toast.error(t("Failed updated")) 
     },
   });
 
@@ -133,7 +131,7 @@ function ModalButton(props) {
             <h2 className="mb-5 mt-3"> {t("Edit Profile")}</h2>
 
             <div className="text-dark">
-              {/* <Input
+              <Input
                 name={"username"}
                 label={"User Name"}
                 error={
@@ -144,7 +142,7 @@ function ModalButton(props) {
                 value={values.username}
                 inputType={"text"}
                 errorColor={"red"}
-              /> */}
+              />
 
               <Input
                 name={"fullname"}

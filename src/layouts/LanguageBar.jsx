@@ -9,7 +9,6 @@ function LanguageBar() {
   const [language,setLanguage] = useState("TR");
   const userService = new UserServices();
   const { i18n } = useTranslation();
-console.log(i18n);
   const onChangeLanguage = (language) => {
     const lang = language;
     setLanguage(lang.toUpperCase())

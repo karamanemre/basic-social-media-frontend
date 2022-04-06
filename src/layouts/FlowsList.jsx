@@ -20,19 +20,18 @@ import FlowService from "../services/FlowService";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useLocation } from "react-router";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
-import Spinner from './Spinner'
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
+import Spinner from "./Spinner";
 
 function FlowsList() {
-
   const flowService = new FlowService();
   const [firstFlowsId, setFirstFlowsId] = useState();
   const [newFlowCount, setNewFlowCount] = useState(0);
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const { content , isLoading } = useSelector((state) => state.flow);
-  const { user ,loggedInUser} = useSelector((state) => state.user);
+  const { content, isLoading } = useSelector((state) => state.flow);
+  const { user, loggedInUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
   const { pageNo } = useSelector((state) => state.flow);
@@ -41,7 +40,11 @@ function FlowsList() {
     if (pathname === `/user/${user.username}`) {
       dispatch(resetContent());
       dispatch(
-        getFlowsByUsername({ username: user.username, pageNo: pageNo, pageSize: process.env.REACT_APP_PAGE_SIZE })
+        getFlowsByUsername({
+          username: user.username,
+          pageNo: pageNo,
+          pageSize: process.env.REACT_APP_PAGE_SIZE,
+        })
       );
     }
   }, [user.username]);
@@ -70,7 +73,7 @@ function FlowsList() {
 
   const handleDeleteById = (id) => {
     dispatch(deleteById(id));
-  }
+  };
 
   return (
     <div className="flow-main">
@@ -87,10 +90,15 @@ function FlowsList() {
       )}
       <div className="flow-sub">
         <div className="flow-list">
-          {isLoading && <div className="d-flex justify-content-center" >
-            <Spinner/>
-          </div> }
-          {!isLoading && content && content.length < 1 && t("You haven't shared a post yet")}
+          {isLoading && (
+            <div className="d-flex justify-content-center">
+              <Spinner />
+            </div>
+          )}
+          {!isLoading &&
+            content &&
+            content.length < 1 &&
+            t("You haven't shared a post yet")}
           {content &&
             content.map((flow, key) => (
               <div className="card p-3 mb-3" key={key}>
@@ -126,18 +134,31 @@ function FlowsList() {
                       </div>
                     </div>
                   </div>
-                  
-                  {flow.user.id === loggedInUser.id &&
-                  <div className="card-properties">
-                    <div className="dropdown">
-                      <MoreVertIcon fontSize="12px" />
-                      <div className="dropdown-content">
-                        <div className="d-flex align-items-center" onClick={()=> handleDeleteById(flow.id) }><DeleteOutlineIcon style={{width:"20px",color:"red"}}/> Sil</div>
-                        <div className="d-flex align-items-center"><EditIcon style={{width:"20px",color:"#4FA3F8"}}/> Düzenle</div>
+
+                  {flow.user.id === loggedInUser.id && (
+                    <div className="card-properties">
+                      <div className="dropdown">
+                        <MoreVertIcon fontSize="12px" />
+                        <div className="dropdown-content">
+                          <div
+                            className="d-flex align-items-center"
+                            onClick={() => handleDeleteById(flow.id)}
+                          >
+                            <DeleteOutlineIcon
+                              style={{ width: "20px", color: "red" }}
+                            />{" "}
+                            Sil
+                          </div>
+                          <div className="d-flex align-items-center">
+                            <EditIcon
+                              style={{ width: "20px", color: "#4FA3F8" }}
+                            />{" "}
+                            Düzenle
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                }
+                  )}
                 </div>
                 <div className="body">{flow.content}</div>
               </div>
