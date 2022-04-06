@@ -11,6 +11,7 @@ import ErrorPage from "../pages/ErrorPage";
 import User from "../pages/User";
 import Flow from "../pages/Flow";
 import Settings from "../pages/Settings";
+import LoginAlert from "../pages/LoginAlert";
 
 function Dashboard() {
 
@@ -23,12 +24,13 @@ function Dashboard() {
         <Route exact path="/" element={ <Home />}/>
         <Route exact path="/login" element={ <Login />}/>
         <Route exact path="/signup" element={<Signup />}/>
+       {isAuthentication && <>
         <Route exact path="/user/:username" element={<User/>}/>
         <Route exact path="/users/list" element={<UsersList/>}/>
         <Route exact path="/flow" element={<Flow/>}/>
         <Route exact path="/settings" element={<Settings/>}/>
-
-        <Route exact path="*" element={<ErrorPage/>}/>
+       </>}
+        <Route exact path="*" element={!isAuthentication ? <LoginAlert/> : <ErrorPage/>}/>
       </Routes>
     </div>
   );
