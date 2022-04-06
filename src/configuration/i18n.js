@@ -66,6 +66,8 @@ i18n.use(initReactI18next).init({
 
         //Validations errors
         "Validations errors update" : "This username already taken",
+        "Successfully updated" : "Successfully updated",
+        "Failed updated":"Failed updated",
 
         //Login Form Error Messages İtems
         USER_NAME_CAN_NOT_BE_NULL:
@@ -153,6 +155,8 @@ i18n.use(initReactI18next).init({
 
          //Validations errors
          "Validations errors update" : "Bu kullanıcı adını alamazsınız",
+         "Successfully updated" : "Güncellendi",
+         "Failed updated":"Başarısız",
         
 
         //Login Form Error Messages İtems

@@ -161,3 +161,29 @@
     }
   }
 }
+
+
+//error page
+
+.alert-card{
+  margin-top: 10rem;
+}
+
+.login-alert{
+  .card{
+    padding: 2rem;
+    height: 250px;
+    width: 450px;
+    background-color: #e3e7e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a{
+      margin-top: 1rem;
+      margin-right: 1rem;
+      button{
+        border-radius: 2rem !important;
+      }
+    }
+  }
+}

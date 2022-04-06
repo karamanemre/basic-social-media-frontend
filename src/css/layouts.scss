@@ -147,6 +147,7 @@ button {
     }
 
     .item {
+      color: black ;
       span {
         text-align: left;
         margin-right: auto;
@@ -154,7 +155,7 @@ button {
     }
 
     .item:hover {
-      color: #0d6efd;
+      color: #6a9de8 ;
       transition: 0.2s;
     }
   }
