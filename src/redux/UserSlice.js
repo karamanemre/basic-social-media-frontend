@@ -59,6 +59,7 @@ export const userSlice = createSlice({
         user:{},//update and getUser
         images:[],
         loggedInUser: secureLS.get("loggedInUser") ? secureLS.get("loggedInUser") : {},
+        token:"",
     },
     reducers:{
         logout:(state,action)=>{
@@ -97,6 +98,7 @@ export const userSlice = createSlice({
             state.isLoading=false
             state.isAuthentication=true
             state.item = {...action.payload.data}
+            state.token = action.payload.data.token
             handleChangeState(state)
             
         },

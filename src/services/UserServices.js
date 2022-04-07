@@ -11,8 +11,7 @@ export default class UserServices {
   }
 
   login(credential) {
-    this.setAxiosHeader(credential)
-    return axios.post(`/api/auth/authenticationHandle`,credential,{ auth: credential })
+    return axios.post(`/api/auth/authenticationHandle`,credential)
   }
 
   logout(){
@@ -39,9 +38,8 @@ export default class UserServices {
     return axios.get(`${basePath}//getById/${id}`);
   }
 
-  setAxiosHeader(credential){
-    let {username,password} = credential
-    let signature = `Basic ${btoa(username+":"+password)}`
+  setAxiosHeader(token){
+    let signature = `Bearer ${token})}`
     secureLS.set("authorization",signature)
     axios.defaults.headers['Authorization'] = signature
   }
